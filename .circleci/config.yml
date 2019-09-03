@@ -1,9 +1,6 @@
 version: 2
 jobs:
   build:
-    branches:
-      ignore:
-        - master
     docker:
       - image: circleci/node:10.12.0
     steps:
@@ -11,7 +8,6 @@ jobs:
       - run: rm -rf template
       - run: git clone https://github.com/ShopElf/nacelle-sandbox-alpha template
       - run: git add .
-      - run: git commit -m "updated template"
+      - run: git commit -m "updated template [ci skip]"
       - run: git remote add origin https://github.com/ShopElf/nacelle-sandbox-generator
       - run: git push
-      - run: hi
