@@ -7,7 +7,7 @@ jobs:
       - run: git config --global user.email "levi@shopelf.co"
       - run: git config --global user.name "Levi Whalen"
       - run: git init
-      - run: git pull
+      - run: git pull https://$GITHUB_USER:$GITHUB_PASS@github.com/ShopElf/nacelle-sandbox-generator.git
       - run: rm -rf template
       - run: git clone https://github.com/ShopElf/nacelle-sandbox-alpha template
       - run: git add .
