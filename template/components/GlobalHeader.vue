@@ -23,6 +23,7 @@
             @click.native="disableMenu"
           >{{ link.title }}</nuxt-link>
         </div>
+        <search-box class="is-hidden-mobile" />
         <main-nav-cart />
       </div>
     </div>
@@ -53,6 +54,7 @@
         </div>
         <div class="nav-flyout-body">
           <slot name="flyout-menu">
+            <search-box class="is-hidden-tablet" />
             <nuxt-link
               v-for="(link, index) in mobileMenu"
               :key="index"
