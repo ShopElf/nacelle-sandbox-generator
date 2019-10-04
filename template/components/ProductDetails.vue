@@ -23,12 +23,12 @@
       <p class="price">
         <product-price v-if="currentVariant" :price="currentVariant.price"  />
       </p>
-
       <product-description :description="product.description" />
       <product-variant-select
         v-if="currentVariant"
         :product="product"
         :variant="currentVariant"
+        v-on:variant-selected="onVariantSelected"
       />
     </div>
   </div>
@@ -38,10 +38,16 @@
 import { mapState, mapMutations, mapGetters, mapActions } from 'vuex'
 //import your own components here
 //import ProductSpecial from '~/components/ComponentName'
+
 export default {
   components: {
     //export your components by name here:
     // ComponentName
+  },
+  data () {
+    return {
+      selectedVariant: undefined
+    }
   },
   props: {
     product: {
@@ -49,24 +55,26 @@ export default {
       default: () => {}
     }
   },
-  watch: {
-    variant(val) {
-      if (val != null) {
-        this.setVariant(this.variant)
-      }
-    }
-  },
   computed: {
-    currentVariant() {
-      if (this.variant != null) {
-        return this.variant
-      } else {
+    currentVariant () {
+      if (this.selectedVariant) {
+        return this.selectedVariant
+      } else if (
+        this.product &&
+        this.product.variants &&
+        this.product.variants.length
+      ) {
         return this.product.variants[0]
       }
+
+      return undefined
     }
   },
   methods: {
-    ...mapMutations('cart', ['showCart'])
+    ...mapMutations('cart', ['showCart']),
+    onVariantSelected ({ selectedVariant }) {
+      this.selectedVariant = selectedVariant
+    }
   }
 }
 </script>
