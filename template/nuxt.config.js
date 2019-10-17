@@ -1,7 +1,5 @@
 require('dotenv').config()
 
-import fetchAllRoutes from './plugins/utils/fetchAllRoutes'
-
 export default {
   mode: process.env.BUILD_MODE,
   /*
@@ -52,16 +50,13 @@ export default {
     '@nacelle/nacelle-nuxt-module',
     '@nuxtjs/sitemap',
     '@nuxtjs/axios',
-    '~/plugins/getRoutesJSON'
+    '~/plugins/NacelleStaticData'
   ],
 
   sitemap: {
     gzip: true,
     async routes() {
-      let routes = await fetchAllRoutes()
-      return routes.map(routePayload => {
-        return routePayload.route
-      })
+      return require('./static/data/routes.json')
     }
   },
 
@@ -69,14 +64,15 @@ export default {
     spaceID: process.env.NACELLE_SPACE_ID,
     token: process.env.NACELLE_GRAPHQL_TOKEN,
     gaID: process.env.NACELLE_GA_ID,
-    fbID: process.env.NACELLE_FB_ID
+    fbID: process.env.NACELLE_FB_ID,
+    skipPrefetch: (process.env.SKIP_PREFETCH === 'true')
   },
 
   generate: {
     workers: 4,
     concurrency: 4,
     async routes() {
-      return await fetchAllRoutes()
+      return require('./static/data/routes.json')
     },
     done({ duration, errors, workerInfo }) {
       if (errors.length) {
@@ -87,7 +83,7 @@ export default {
   },
 
   build: {
-    // analyze: true,
+    analyze: true,
     postcss: {
       preset: {
         features: {

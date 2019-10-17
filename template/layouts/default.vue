@@ -3,14 +3,13 @@
     <global-header ref="header" />
     <nuxt :style="{'margin-top': `${headerHeight}px`}" />
     <site-footer />
-    <!-- <event-dispatcher /> -->
+    <event-dispatcher />
   </div>
 </template>
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 import localforage from 'localforage'
-import { prefetchCollectionsAndContent } from '@nacelle/nacelle-graphql-queries-mixins'
 import GlobalHeader from '~/components/GlobalHeader'
 import SiteFooter from '~/components/SiteFooter'
 export default {
@@ -23,7 +22,6 @@ export default {
     ...mapActions('cart', ['updateLocalCart']),
     ...mapActions('user', ['readSession'])
   },
-  mixins: [prefetchCollectionsAndContent],
   data() {
     return {
       headerHeight: null

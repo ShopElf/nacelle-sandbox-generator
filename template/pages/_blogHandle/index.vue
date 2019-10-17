@@ -34,14 +34,26 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { getBlog } from '@nacelle/nacelle-graphql-queries-mixins'
+import { staticBlogData } from '~/plugins/NacelleFetchStatic'
 import ArticlePreview from '~/components/ArticlePreview'
 
 export default {
   components: {
     ArticlePreview
   },
-  mixins: [getBlog],
+  data () {
+    return {
+      handle: this.$route.params.blogHandle,
+      blog: null
+    }
+  },
+  async asyncData({ params, app, payload }) {
+    const blogData = staticBlogData(params.blogHandle, app)
+      
+    return {
+      ...blogData
+    }
+  },
   computed: {
     ...mapGetters('space', ['getMetatag']),
     blogProducts() {
@@ -68,6 +80,24 @@ export default {
     filteredArticles() {
       const copy = [...this.articles]
       return copy.splice(1, copy.length - 1)
+    }
+  },
+  created() {
+    if (!this.blog && !this.noBlogData) {
+      this.$nacelleApollo.getBlog(
+        this.handle,
+        this.$apollo,
+        {
+          error: () => {
+            this.$nacelleHelpers.debugLog('No blog data.')
+          }
+        }
+      )
+    }
+  },
+  methods: {
+    pageError () {
+      this.$nuxt.error({ statusCode: 404, message: 'Blog page does not exist' })
     }
   },
   head() {
