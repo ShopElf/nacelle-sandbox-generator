@@ -7,10 +7,10 @@ jobs:
       - run: git config --global user.email "levi@leviwhalen.com"
       - run: git config --global user.name "Levi Whalen"
       - run: git init
-      - run: git pull https://$GITHUB_USER:$GITHUB_PASS@github.com/ShopElf/nacelle-sandbox-generator.git
+      - run: git pull https://$GITHUB_USER:$GITHUB_PASS@github.com/getnacelle/nacelle-sandbox-generator.git
       - run: rm -rf template
       - run: git clone https://github.com/ShopElf/nacelle-sandbox-alpha template
       - run: git add .
       - run: git commit -m "updated template [ci skip]"
-      - run: git remote add origin https://github.com/ShopElf/nacelle-sandbox-generator
+      - run: git remote add origin https://github.com/getnacelle/nacelle-sandbox-generator
       - run: git push https://$GITHUB_USER:$GITHUB_PASS@github.com/ShopElf/nacelle-sandbox-generator.git
