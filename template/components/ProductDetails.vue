@@ -1,16 +1,35 @@
 <template>
   <div class="product columns">
     <div class="column is-6">
-      <product-media-select-view :featuredMedia="product.featuredMedia" :media="product.media" />
+      <product-media-select-view
+        v-if="product && product.featuredMedia && product.media"
+        :featuredMedia="product.featuredMedia"
+        :media="product.media"
+      />
     </div>
     <div class="column is-5 is-offset-1">
       <product-title :title="product.title" />
-      <product-category :category="product.productType" v-if="product.productType" />
+      <!-- <product-add-to-cart-button
+        :product="product"
+        :variant="currentVariant"
+        :allOptionsSelected="true"
+        :onlyOneOption="true"
+        :metafields="[{key:'test', value:'hi'}]"
+      />-->
+      <product-category
+        v-if="product.productType"
+        :category="product.productType"
+      />
       <p class="price">
-        <product-price :price="currentVariant.price" />
+        <product-price v-if="currentVariant" :price="currentVariant.price"  />
       </p>
       <product-description :description="product.description" />
-      <product-variant-select :product="product" :variant="currentVariant" />
+      <product-variant-select
+        v-if="currentVariant"
+        :product="product"
+        :variant="currentVariant"
+        v-on:variant-selected="onVariantSelected"
+      />
     </div>
   </div>
 </template>
@@ -19,10 +38,16 @@
 import { mapState, mapMutations, mapGetters, mapActions } from 'vuex'
 //import your own components here
 //import ProductSpecial from '~/components/ComponentName'
+
 export default {
   components: {
     //export your components by name here:
     // ComponentName
+  },
+  data () {
+    return {
+      selectedVariant: undefined
+    }
   },
   props: {
     product: {
@@ -30,24 +55,26 @@ export default {
       default: () => {}
     }
   },
-  watch: {
-    variant(val) {
-      if (val != null) {
-        this.setVariant(this.variant)
-      }
-    }
-  },
   computed: {
-    currentVariant() {
-      if (this.variant != null) {
-        return this.variant
-      } else {
+    currentVariant () {
+      if (this.selectedVariant) {
+        return this.selectedVariant
+      } else if (
+        this.product &&
+        this.product.variants &&
+        this.product.variants.length
+      ) {
         return this.product.variants[0]
       }
+
+      return undefined
     }
   },
   methods: {
-    ...mapMutations('cart', ['showCart'])
+    ...mapMutations('cart', ['showCart']),
+    onVariantSelected ({ selectedVariant }) {
+      this.selectedVariant = selectedVariant
+    }
   }
 }
 </script>

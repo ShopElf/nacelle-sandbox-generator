@@ -1,53 +1,37 @@
 <template>
-  <div class="page page-shop">
+  <div class="page page-shop" v-if="collection">
     <content-hero-banner
       v-if="collection"
       :title="collection.title"
       :backgroundImgUrl="featuredImage"
     />
-    <page-content :page="page" :products="products" />
     <section class="section">
       <div class="container">
         <div class="columns is-multiline">
           <product-grid
-            v-if="products"
+            v-if="products && products.length > 0"
             :products="products"
             :showAddToCart="true"
             :showQuantityUpdate="true"
           />
         </div>
       </div>
-      <div ref="fetchMore" class="fetch-more-component"></div>
+      <div ref="fetchMore" class="fetch-more-component" />
     </section>
   </div>
 </template>
 
 <script>
 import { mapState, mapGetters, mapMutations } from 'vuex'
-import { getCollection } from '@nacelle/nacelle-graphql-queries-mixins'
 import ProductGrid from '~/components/ProductGrid'
+import { getCollection } from '@nacelle/nacelle-tools'
+
 export default {
   name: 'home',
   components: { ProductGrid },
-  data() {
-    return {
-      collection: null
-    }
-  },
-  mixins: [getCollection],
+  mixins: [ getCollection() ],
   computed: {
     ...mapGetters('space', ['getMetatag']),
-    products() {
-      if (
-        this.collection &&
-        this.collection.products &&
-        this.collection.products.length
-      ) {
-        return this.collection.products
-      }
-
-      return null
-    },
     featuredImage() {
       if (
         this.collection &&
@@ -58,6 +42,11 @@ export default {
       }
 
       return null
+    }
+  },
+  methods: {
+    pageError () {
+      this.$nuxt.error({ statusCode: 404, message: 'Page does not exist' })
     }
   },
   head() {
@@ -107,15 +96,7 @@ export default {
         meta
       }
     }
-  },
-  // mounted() {
-  //   if (this.collection && this.collection.products == null) {
-  //     this.$nuxt.error({
-  //       statusCode: 404,
-  //       message: 'That collection could not be found'
-  //     })
-  //   }
-  // }
+  }
 }
 </script>
 <style lang="scss" scoped>

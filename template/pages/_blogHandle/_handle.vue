@@ -33,7 +33,7 @@
             <div class="column is-9 content">
               <blog-article-content
                 :article="article"
-                :products="collection ? collection.products : []"
+                :products="products"
               >
                 <!-- Extra HTML added after content -->
                 <nuxt-link :to="'/blog'" class="breadcrumb">Back to Blog</nuxt-link>
@@ -48,22 +48,14 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { getBlogArticle } from '@nacelle/nacelle-graphql-queries-mixins'
+import nmerge from 'nuxt-merge-asyncdata'
+import { getBlogArticle, getCollection } from '@nacelle/nacelle-tools'
 
-export default {
-  mixins: [getBlogArticle],
+export default nmerge({
+  mixins: [ getCollection(), getBlogArticle({}) ],
   computed: {
     ...mapGetters('space', ['getMetatag'])
   },
-  mounted() {
-    if (JSON.stringify(this.article) == '{}') {
-      this.$nuxt.error({
-        statusCode: 404,
-        message: 'That article could not be found'
-      })
-    }
-  },
-
   head() {
     if (this.article) {
       const properties = {}
@@ -106,13 +98,19 @@ export default {
         })
       }
 
+      meta.push({
+        hid: 'og:type',
+        property: 'og:type',
+        content: 'article'
+      })
+
       return {
         ...properties,
         meta
       }
     }
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>

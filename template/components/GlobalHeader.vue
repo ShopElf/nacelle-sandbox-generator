@@ -18,11 +18,12 @@
             v-for="(link, index) in mainMenu"
             :key="index"
             :to="link.to"
-            active-class="is-active"
+            exact-active-class="is-active"
             class="main-nav-item"
             @click.native="disableMenu"
           >{{ link.title }}</nuxt-link>
         </div>
+        <search-box class="is-hidden-mobile" />
         <main-nav-cart />
       </div>
     </div>
@@ -53,6 +54,7 @@
         </div>
         <div class="nav-flyout-body">
           <slot name="flyout-menu">
+            <search-box class="is-hidden-tablet" />
             <nuxt-link
               v-for="(link, index) in mobileMenu"
               :key="index"
@@ -72,7 +74,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations, mapGetters } from 'vuex'
 import Cart from '~/components/Cart'
 export default {
   components: { Cart },
@@ -85,42 +87,19 @@ export default {
   computed: {
     ...mapState('space', ['id', 'name', 'linklists']),
     ...mapState('menu', ['menuVisible']),
+    ...mapGetters('space', ['getLinks']),
     logoSrc() {
       if (this.id) {
-        return `https://nacelle-assets.s3-us-west-2.amazonaws.com/space/${this.id}/logo.png`
+        return `https://d3ej2r3y1rjyfi.cloudfront.net/space/${this.id}/logo.png`
       }
 
       return ''
     },
     mainMenu() {
-      if (this.linklists) {
-        const linklist = this.linklists.find(
-          linklist => linklist.handle === 'main-menu'
-        )
-
-        if (linklist) {
-          return linklist.links
-        }
-
-        return []
-      }
-
-      return []
+      return this.getLinks('main-menu')
     },
     mobileMenu() {
-      if (this.linklists) {
-        const linklist = this.linklists.find(
-          linklist => linklist.handle === 'mobile-menu'
-        )
-
-        if (linklist) {
-          return linklist.links
-        }
-
-        return []
-      }
-
-      return []
+      return this.getLinks('mobile-menu')
     }
   },
   methods: {
@@ -217,7 +196,7 @@ button.main-nav-cart {
   z-index: 999;
 
   @media screen and (max-width: 768px) {
-    width: 100%
+    width: 100%;
   }
 }
 

@@ -1,8 +1,7 @@
 <template>
   <div class="page">
-    <div v-if="$apollo.loading">Loading...</div>
     <!-- Begin editing your homepage here -->
-    <div v-if="!page || page.sections.length === 0">
+    <div v-if="this.noPageData">
       <content-hero-banner
         id="hero-banner"
         backgroundImgUrl="https://nacelle-assets.s3-us-west-2.amazonaws.com/hero-banner.jpg"
@@ -51,8 +50,8 @@
                 name: "cta", data: "ctaUrl", "ctaText", "ctaHandler"
 
           <content-hero-banner
-            v-if="section.props.contentType === 'ContentHeroBanner'"
-            v-bind="section.props"
+            v-if="section.contentType === 'ContentHeroBanner'"
+            v-bind="section.data"
           >
             <template v-slot:body="{ title }">
               <h1 class="special-title">{{ title }}</h4>
@@ -67,8 +66,8 @@
                 name: "cta", data: "ctaUrl", "ctaText", "ctaHandler"
 
           <content-side-by-side
-            v-if="section.props.contentType === 'ContentSideBySide'"
-            v-bind="section.props"
+            v-if="section.contentType === 'ContentSideBySide'"
+            v-bind="section.data"
           />
       -->
 
@@ -79,8 +78,8 @@
                 name: "products", data: "products", "columns"
 
           <content-product-grid
-            v-if="section.props.contentType === 'ContentProductGrid'"
-            v-bind="section.props"
+            v-if="section.contentType === 'ContentProductGrid'"
+            v-bind="section.data"
           />
       -->
 
@@ -88,8 +87,8 @@
             * Edit Testimonials *
 
           <content-testimonials
-            v-if="section.props.contentType === 'ContentTestimonials'"
-            v-bind="section.props"
+            v-if="section.contentType === 'ContentTestimonials'"
+            v-bind="section.data"
           />
       -->
 
@@ -99,18 +98,17 @@
 </template>
 
 <script>
+import nmerge from 'nuxt-merge-asyncdata'
 import { mapState } from 'vuex'
-import { getPage } from '@nacelle/nacelle-graphql-queries-mixins'
+import { getPage, getCollection } from '@nacelle/nacelle-tools'
 
-export default {
-  data() {
-    return {
-      handle: 'homepage'
-    }
-  },
-  mixins: [getPage],
+export default nmerge({
+  mixins: [
+    getPage({ pageHandle: 'homepage' }),
+    getCollection({ pageHandle: 'homepage' })
+  ],
   computed: {
     ...mapState('space', ['name'])
   }
-}
+})
 </script>

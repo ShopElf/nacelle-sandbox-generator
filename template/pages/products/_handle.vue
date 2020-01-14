@@ -28,19 +28,21 @@
 
 <script>
 import { mapMutations, mapGetters } from 'vuex'
+import productMetafields from '@nacelle/nacelle-vue-components/dist/mixins/productMetafields'
+// import { getProduct } from '@nacelle/nacelle-graphql-queries-mixins'
+import { fetchStatic, getProduct } from '@nacelle/nacelle-tools'
 import ProductDetails from '~/components/ProductDetails'
-import { getProduct } from '@nacelle/nacelle-graphql-queries-mixins'
 
 export default {
+  mixins: [getProduct(), productMetafields],
   components: {
     ProductDetails
   },
-  mixins: [getProduct],
   computed: {
     ...mapGetters('space', ['getMetatag'])
   },
   methods: {
-    ...mapMutations('cart', ['showCart'])
+    ...mapMutations('cart', ['showCart']),
   },
   head() {
     if (this.product) {
@@ -89,19 +91,6 @@ export default {
         meta
       }
     }
-  },
-  beforeMount() {
-    if (this.product == null) {
-      console.log('nothing here')
-      this.$nuxt.error({
-        statusCode: 404,
-        message: 'That product could not be found'
-      })
-    }
-  },
-  mounted() {
-    this.$apollo.queries.product.refetch()
-    this.$apollo.queries.product.startPolling(5000)
   }
 }
 </script>

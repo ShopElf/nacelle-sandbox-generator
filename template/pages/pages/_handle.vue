@@ -1,6 +1,5 @@
 <template>
   <div class="page">
-    <div v-if="$apollo.loading">Loading...</div>
     <page-content :page="page" :products="products">
       <!-- 
         /****
@@ -9,8 +8,8 @@
       -->
 
         <!-- <template v-slot:section="{ section }"> -->
-          
-          <!-- 
+
+      <!-- 
             * Edit Hero Banner *
                 Available slots:
                 name: "background", data: "backgroundImgUrl", "mobileBackgroundImgUrl", "backgroundAltTag"
@@ -18,61 +17,58 @@
                 name: "cta", data: "ctaUrl", "ctaText", "ctaHandler"
 
           <content-hero-banner
-            v-if="section.props.contentType === 'ContentHeroBanner'"
-            v-bind="section.props"
+            v-if="section.contentType === 'ContentHeroBanner'"
+            v-bind="section.data"
           >
             <template v-slot:body="{ title }">
               <h1 class="special-title">{{ title }}</h4>
             </template>
           </content-hero-banner>
-          -->
+      -->
 
-          <!--
+      <!--
             * Edit Side-by-Side Section *
                 Available slots:
                 name: "body", data: "title", "copy"
                 name: "cta", data: "ctaUrl", "ctaText", "ctaHandler"
 
           <content-side-by-side
-            v-if="section.props.contentType === 'ContentSideBySide'"
-            v-bind="section.props"
+            v-if="section.contentType === 'ContentSideBySide'"
+            v-bind="section.data"
           />
-          -->
+      -->
 
-          <!--
+      <!--
             * Edit Product Grid *
                 Available slots:
                 name: "header", data: "title"
                 name: "products", data: "products", "columns"
 
           <content-product-grid
-            v-if="section.props.contentType === 'ContentProductGrid'"
-            v-bind="section.props"
+            v-if="section.contentType === 'ContentProductGrid'"
+            v-bind="section.data"
           />
-          -->
+      -->
 
-          <!-- 
+      <!-- 
             * Edit Testimonials *
 
           <content-testimonials
-            v-if="section.props.contentType === 'ContentTestimonials'"
-            v-bind="section.props"
+            v-if="section.contentType === 'ContentTestimonials'"
+            v-bind="section.data"
           />
-          -->
+      -->
 
-        <!-- </template> -->
+      <!-- </template> -->
     </page-content>
   </div>
 </template>
 
 <script>
-import { getPage } from '@nacelle/nacelle-graphql-queries-mixins'
-export default {
-  data() {
-    return {
-      handle: this.$route.params.handle
-    }
-  },
-  mixins: [getPage]
-}
+import nmerge from 'nuxt-merge-asyncdata'
+import { getPage, getCollection } from '@nacelle/nacelle-tools'
+
+export default nmerge({
+  mixins: [getPage(), getCollection()]
+})
 </script>

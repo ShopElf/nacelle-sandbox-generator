@@ -1,7 +1,8 @@
 <template>
-  <div class="columns is-multiline is-paddingless">
+  <div v-if="products" class="columns is-multiline is-paddingless">
     <div v-for="product in products" :key="product.id" :class="columnClasses">
       <product-card
+        v-if="product"
         :product="product"
         :showQuantityUpdate="showQuantityUpdate"
         :showAddToCart="showAddToCart"

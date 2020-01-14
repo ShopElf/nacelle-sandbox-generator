@@ -1,7 +1,14 @@
 <template>
   <div class="site-footer">
     <div class="container">
-      <div class="columns is-multiline is-marginless">
+      <!-- TEMPORARY FOOTER START -->
+      <div class="column is-6 is-offset-3 logo has-text-centered">
+        <img :src="logoSrc" :alt="name" />
+      </div>
+      <div class="column is-12 has-text-centered">© NACELLE 2019</div>
+      <!-- TEMPORARY FOOTER END -->
+
+      <!-- <div class="columns is-multiline is-marginless">
         <div class="column is-3 logo has-text-centered">
           <img :src="logoSrc" :alt="name" />
         </div>
@@ -34,68 +41,33 @@
         </div>
 
         <div class="column is-12 has-text-centered">© NACELLE 2019</div>
-      </div>
+      </div>-->
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   computed: {
     ...mapState('space', ['id', 'name', 'linklists']),
+    ...mapGetters('space', ['getLinks']),
     logoSrc() {
       if (this.id) {
-        return `https://nacelle-assets.s3-us-west-2.amazonaws.com/space/${this.id}/logo.png`
+        return `https://d3ej2r3y1rjyfi.cloudfront.net/space/${this.id}/logo.png`
       }
 
       return ''
     },
     aboutMenu() {
-      if (this.linklists) {
-        const linklist = this.linklists.find(
-          linklist => linklist.handle === 'about'
-        )
-
-        if (linklist) {
-          return linklist.links
-        }
-
-        return []
-      }
-
-      return []
+      return this.getLinks('about')
     },
     shopMenu() {
-      if (this.linklists) {
-        const linklist = this.linklists.find(
-          linklist => linklist.handle === 'shop'
-        )
-
-        if (linklist) {
-          return linklist.links
-        }
-
-        return []
-      }
-
-      return []
+      return this.getLinks('shop')
     },
     accountMenu() {
-      if (this.linklists) {
-        const linklist = this.linklists.find(
-          linklist => linklist.handle === 'account'
-        )
-
-        if (linklist) {
-          return linklist.links
-        }
-
-        return []
-      }
-
-      return []
+      return this.getLinks('account')
     }
   }
 }

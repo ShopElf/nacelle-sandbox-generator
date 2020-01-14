@@ -27,6 +27,10 @@
             />
           </div>
         </div>
+        <div
+            ref="fetchMore"
+            class="fetch-more-component"
+          />
       </div>
     </section>
   </div>
@@ -34,14 +38,15 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { getBlog } from '@nacelle/nacelle-graphql-queries-mixins'
+import nmerge from 'nuxt-merge-asyncdata'
+import { getBlog } from '@nacelle/nacelle-tools'
 import ArticlePreview from '~/components/ArticlePreview'
 
-export default {
+export default nmerge({
   components: {
     ArticlePreview
   },
-  mixins: [getBlog],
+  mixins: [getBlog()],
   computed: {
     ...mapGetters('space', ['getMetatag']),
     blogProducts() {
@@ -50,13 +55,6 @@ export default {
       }
 
       return null
-    },
-    articles() {
-      if (this.blog && this.blog.articles && this.blog.articles.length > 0) {
-        return this.blog.articles
-      }
-
-      return []
     },
     featuredArticle() {
       if (this.articles.length > 0) {
@@ -93,7 +91,7 @@ export default {
       meta
     }
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>

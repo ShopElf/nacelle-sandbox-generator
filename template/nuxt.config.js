@@ -1,6 +1,7 @@
 require('dotenv').config()
 
-import fetchAllRoutes from './plugins/utils/fetchAllRoutes'
+import path from 'path'
+import fs from 'fs-extra'
 
 export default {
   mode: process.env.BUILD_MODE,
@@ -18,21 +19,18 @@ export default {
         content: process.env.npm_package_description || ''
       }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
-
     link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
         rel: 'stylesheet',
         type: 'text/css',
-        href:
-          'https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css'
+        href: `//dmf8x4ovgacxs.cloudfront.net/${process.env.NACELLE_SPACE_ID}/styles.css`
       }
     ],
-    link: [
+    script: [
       {
-        rel: 'stylesheet',
-        type: 'text/css',
-        href: `//space-styles.s3.amazonaws.com/${process.env.NACELLE_SPACE_ID}/styles.css`
+        src:
+          'https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver'
       }
     ]
   },
@@ -44,10 +42,13 @@ export default {
   /*
    ** Global CSS
    */
-  css: ['@nacelle/nacelle-vue-components/dist/base-styles.css'],
+  css: [
+    '@nacelle/nacelle-vue-components/dist/base-styles.css',
+    '@/assets/global.css'
+  ],
 
   env: {
-    nacelleEndpoint: process.env.NACELLE_GRAPHQL_ENDPOINT,
+    nacelleSpaceID: process.env.NACELLE_SPACE_ID,
     nacelleToken: process.env.NACELLE_GRAPHQL_TOKEN,
     buildMode: process.env.BUILD_MODE
   },
@@ -56,46 +57,36 @@ export default {
     '@nuxtjs/pwa',
     '@nuxtjs/dotenv',
     '@nacelle/nacelle-nuxt-module',
-    // '@nuxtjs/sitemap'
+    '@nuxtjs/sitemap',
+    '@nuxtjs/axios',
+    'vue-currency-filter/nuxt'
   ],
 
-  // sitemap: {
-  //   gzip: true,
-  //   async routes() {
-  //     return await fetchAllRoutes()
-  //   }
-  // },
-
-  nacelle: {
-    endpoint: process.env.NACELLE_GRAPHQL_ENDPOINT,
-    token: process.env.NACELLE_GRAPHQL_TOKEN,
-    gaID: process.env.NACELLE_GA_ID,
-    fbID: process.env.NACELLE_FB_ID
+  sitemap: {
+    gzip: true,
+    async routes() {
+      const staticDir = path.resolve(__dirname, './static/data')
+      const routes = fs.readJsonSync(`${staticDir}/routes.json`)
+      const routesOnly = routes.map(route => route.route)
+      
+      return routesOnly
+    }
   },
 
-  generate: {
-    // concurrency: 1,
-    routes: async () => {
-      return await fetchAllRoutes()
-    }
+  nacelle: {
+    spaceID: process.env.NACELLE_SPACE_ID,
+    token: process.env.NACELLE_GRAPHQL_TOKEN,
+    gaID: process.env.NACELLE_GA_ID,
+    fbID: process.env.NACELLE_FB_ID,
+    skipPrefetch: process.env.SKIP_PREFETCH === 'true'
   },
 
   generate: {
     workers: 4,
-    workerConcurrency: 8,
-    concurrency: 8,
-    async routes() {
-      return await fetchAllRoutes()
-    },
-    done({ duration, errors, workerInfo }) {
-      if (errors.length) {
-        console.log(errors)
-      }
-    }
+    concurrency: 4
   },
 
   build: {
-    // analyze: true,
     postcss: {
       preset: {
         features: {
@@ -103,6 +94,19 @@ export default {
         }
       }
     },
-    transpile: ['@nacelle/nacelle-vue-components']
+    html: {
+      minify: {
+        collapseBooleanAttributes: true,
+        decodeEntities: true,
+        minifyCSS: false,
+        minifyJS: false,
+        processConditionalComments: true,
+        removeEmptyAttributes: true,
+        removeRedundantAttributes: true,
+        trimCustomFragments: true,
+        useShortDoctype: true
+      }
+    },
+    transpile: ['@nacelle/nacelle-vue-components', '@nacelle/nacelle-tools']
   }
 }
