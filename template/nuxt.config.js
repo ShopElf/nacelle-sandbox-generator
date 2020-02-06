@@ -45,7 +45,7 @@ export default {
   css: [
     '@nacelle/nacelle-vue-components/dist/base-styles.css',
     '@/assets/global.css'
-  ],
+  ], 
 
   env: {
     nacelleSpaceID: process.env.NACELLE_SPACE_ID,
@@ -108,6 +108,6 @@ export default {
         useShortDoctype: true
       }
     },
-    transpile: ['@nacelle/nacelle-vue-components', '@nacelle/nacelle-tools']
+    transpile: ['@nacelle/nacelle-tools']
   }
 }
