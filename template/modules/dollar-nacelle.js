@@ -4,7 +4,6 @@ export default function (context, inject) {
 
   const { settings, space } = <%%= JSON.stringify(options) %> 
 
-  console.log(space)
   const { 
     spaceID,
     token,
