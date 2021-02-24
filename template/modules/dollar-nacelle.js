@@ -2,9 +2,7 @@ import NacelleClient from '@nacelle/client-js-sdk/dist/client-js-sdk.esm'
 
 export default function (context, inject) {
 
-<% if(typeof options!=='undefined'){%> 
-  const { settings, space } = <%= JSON.stringify(options) %> 
-  <% } %>
+  const { settings, space } = <%%= JSON.stringify(options) %> 
 
   console.log(space)
   const { 
