@@ -64,7 +64,7 @@ export default {
 
     /* Optional */
     // Set the default internationalization locales string for Nacelle to use
-    // defaultLocale: 'en-US'
+    // defaultLocale: 'en-us'
 
     // Optional array of data type strings to direct Nacelle to include other data types
     // besides products in search data.
