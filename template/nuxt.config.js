@@ -29,7 +29,10 @@ export default {
   // https://nuxtjs.org/blog/moving-from-nuxtjs-dotenv-to-runtime-config/#introducing-the-nuxtjs-runtime-config
   publicRuntimeConfig: {
     API_PORT: process.env.API_PORT,
-    contentAssetStorage: process.env.CONTENT_ASSET_STORAGE || ''
+    contentAssetStorage: process.env.CONTENT_ASSET_STORAGE || '',
+    nacelleId: process.env.NACELLE_SPACE_ID,
+    nacelleToken: process.env.NACELLE_GRAPHQL_TOKEN,
+    nacelleEndpoint: 'https://hailfrequency.com/v2/graphql'
   },
   privateRuntimeConfig: {},
 

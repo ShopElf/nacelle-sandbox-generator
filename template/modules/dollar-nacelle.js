@@ -1,31 +1,16 @@
 import NacelleClient from '@nacelle/client-js-sdk/dist/client-js-sdk.esm'
 
 export default function (context, inject) {
-
-  const { settings, space } = <%%= JSON.stringify(options) %> 
-
-  const { 
-    spaceID,
-    token,
-    endpoint,
-    tem,
-    wishlistEndpoint,
-    defaultLocale
-  } = settings
-
   const client = new NacelleClient({
-    id: spaceID,
-    token,
-    nacelleEndpoint: endpoint,
-    locale: defaultLocale,
-    eventsEndpoint: tem,
-    wishlistEndpoint,
+    id: context.$config.nacelleId,
+    token: context.$config.nacelleToken,
+    nacelleEndpoint: context.$config.nacelleEndpoint,
     useStatic: false
   })
 
-  const setSpace = () => {
+  const setSpace = async () => {
     const { commit } = context.store
-
+    const space = await client.data.space()
     if (space) {
       const { id, name, domain, metafields, linklists } = space
       commit('space/setId', id)
@@ -36,13 +21,11 @@ export default function (context, inject) {
     }
   }
 
-  const nacelleNuxtServerInit = () => {
-    setSpace()
+  const nacelleNuxtServerInit = async () => {
+    await setSpace()
   }
 
   const plugin = {
-    ...settings,
-    defaultLocale,
     nacelleNuxtServerInit,
     setSpace,
     client,
