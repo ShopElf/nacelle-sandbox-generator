@@ -1,8 +1,10 @@
 <template>
-  <span class="product-price nacelle">{{ price }}</span>
+  <span class="product-price nacelle">{{ displayPrice }}</span>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   props: {
     price: {
@@ -10,12 +12,23 @@ export default {
       default: ''
     },
     currencyCode: {
-      type: String,
-      default: 'USD'
-    },
-    showCurrencyCode: {
-      type: Boolean,
-      default: false
+      type: [String, null],
+      default: null
+    }
+  },
+  computed: {
+    ...mapState('user', ['locale']),
+
+    displayPrice() {
+      const { price, currencyCode, locale } = this
+
+      if (currencyCode === locale.currency) {
+        return new Intl.NumberFormat(locale, {
+          style: 'currency',
+          currency: currencyCode
+        }).format(price)
+      }
+      return price
     }
   }
 }

@@ -26,11 +26,17 @@
         />
       </router-link>
       <p
-        v-if="title != 'Default Title'"
+        v-if="item.variant.title != 'Default Title'"
         class="flyout-item-variant-title variant-title nacelle"
-      ></p>
+      >
+        {{ item.variant.title }}
+      </p>
       <div class="flyout-item-details columns is-marginless is-paddingless">
-        <product-price class="flyout-item-price" :price="item.variant.price" />
+        <product-price
+          :price="item.variant.price"
+          :currency-code="item.variant.priceCurrency"
+          class="flyout-item-price"
+        />
         <quantity-selector :item="item" :quantity="item.quantity" />
         <cart-flyout-item-remove-button :line-id="item.variant.id" />
       </div>
@@ -55,22 +61,6 @@ export default {
   computed: {
     productThumbnail() {
       return this.item?.image?.thumbnailSrc
-    },
-    variant() {
-      const defaultVariant = {
-        id: '',
-        title: '',
-        price: 0
-      }
-
-      if (this.item && this.item.variant) {
-        return {
-          ...defaultVariant,
-          ...this.item.variant
-        }
-      }
-
-      return defaultVariant
     }
   },
   methods: {

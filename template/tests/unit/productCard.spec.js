@@ -51,7 +51,7 @@ describe('ProductCard.vue', () => {
 
   it('renders a product card', () => {
     const wrapper = mount(ProductCard, {
-      stubs: ['router-link'],
+      stubs: ['router-link', 'nacelle-image', 'product-price', 'product-title'],
       store,
       localVue,
       propsData: {

@@ -14,7 +14,7 @@
         :category="product.productType"
       />
       <p class="price">
-        <product-price :price="product.price" />
+        <product-price :price="displayPrice" />
       </p>
       <product-description :description="product.description" />
       <product-variant-select :product="product" />
@@ -24,6 +24,7 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex'
+import getPriceForCurrency from '~/utils/getPriceForCurrency'
 
 export default {
   props: {
@@ -36,7 +37,21 @@ export default {
     return {}
   },
   computed: {
-    ...mapState('user', ['locale'])
+    ...mapState('user', ['locale']),
+
+    selectedVariant() {
+      return this.$store.state[`product/${this.product.handle}`].selectedVariant
+    },
+    displayPrice() {
+      if (this.selectedVariant) {
+        return getPriceForCurrency({
+          product: this.product,
+          fallbackPrice: this.selectedVariant.price,
+          locale: this.locale
+        })
+      }
+      return null
+    }
   },
   methods: {
     ...mapMutations('cart', ['showCart'])

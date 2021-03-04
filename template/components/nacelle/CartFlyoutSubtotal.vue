@@ -3,14 +3,14 @@
     <slot :subtotal="cartSubtotal">
       <component :is="titleTag" class="subtotal-title">
         <span>Subtotal:</span>
-        <product-price :price="cartSubtotal" />
+        <product-price v-bind="productPriceProps" />
       </component>
     </slot>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 
 export default {
   props: {
@@ -20,7 +20,15 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('cart', ['cartSubtotal'])
+    ...mapGetters('cart', ['cartSubtotal']),
+    ...mapState('user', ['locale']),
+
+    productPriceProps() {
+      return {
+        price: this.cartSubtotal,
+        currencyCode: this.locale.currency
+      }
+    }
   }
 }
 </script>

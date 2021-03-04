@@ -10,7 +10,10 @@
       <h3 class="column is-5">
         {{ item.title }}
       </h3>
-      <product-price class="column is-3 is-marginless" :price="productPrice" />
+      <product-price
+        v-bind="productPriceProps"
+        class="column is-3 is-marginless"
+      />
     </div>
   </router-link>
 </template>
@@ -31,8 +34,15 @@ export default {
     productThumbnail() {
       return this.item?.featuredMedia?.thumbnailSrc
     },
-    productPrice() {
-      return this.item?.variants?.[0]?.price
+    productPriceProps() {
+      const variant = this.item?.variants?.[0]
+      if (variant && variant.price && variant.priceCurrency) {
+        return {
+          price: variant.price,
+          currencyCode: variant.priceCurrency
+        }
+      }
+      return null
     }
   }
 }

@@ -9,6 +9,7 @@ describe('CartFlyoutSubtotal.vue', () => {
   it('displays the cart subtotal', () => {
     const store = new Vuex.Store(storeConfig())
     const wrapper = mount(CartFlyoutSubtotal, {
+      stubs: ['product-price'],
       store,
       localVue
     })

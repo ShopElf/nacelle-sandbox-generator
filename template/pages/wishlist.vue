@@ -33,6 +33,11 @@ export default {
       await this.fetchProducts()
     }
   },
+  async mounted() {
+    if (this.products) {
+      await this.fetchProducts()
+    }
+  },
   methods: {
     async fetchProducts() {
       const products = this.products.map((product) => {
@@ -45,11 +50,6 @@ export default {
         return this.$store.dispatch(`${namespace}/fetchProduct`, product.handle)
       })
       this.productData = await Promise.all(products)
-    }
-  },
-  async mounted() {
-    if (this.products) {
-      await this.fetchProducts()
     }
   }
 }
