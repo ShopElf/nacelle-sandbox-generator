@@ -128,11 +128,13 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('space', ['getMetatag']),
-    ...mapActions('events', ['articleView'])
+    ...mapGetters('space', ['getMetatag'])
   },
   mounted() {
     this.articleView({ article: this.article })
+  },
+  methods: {
+    ...mapActions('events', ['articleView'])
   }
 }
 </script>
