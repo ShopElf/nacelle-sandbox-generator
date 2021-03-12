@@ -34,8 +34,6 @@ export default {
   computed: {
     iconSrc() {
       switch (this.iconName) {
-        case 'wishlist':
-          return 'https://nacelle-assets.s3-us-west-2.amazonaws.com/default-wishlist-icon.svg'
         case 'cart':
           return 'https://nacelle-assets.s3-us-west-2.amazonaws.com/default-cart-icon.svg'
         case 'account':

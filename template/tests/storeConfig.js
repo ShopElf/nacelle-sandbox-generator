@@ -7,7 +7,6 @@ import product from '../store/product/productModule'
 import user from '../store/user'
 import space from '../store/space'
 import search from '../store/search'
-import wishlist from '../store/wishlist'
 
 export default () => {
   return {
@@ -20,8 +19,7 @@ export default () => {
       product,
       user,
       space,
-      search,
-      wishlist
+      search
     }
   }
 }

@@ -78,15 +78,13 @@ export default {
     await this.clearProductIdb()
     this.getSearchData()
     this.readSession()
-    this.getWishlists()
   },
   methods: {
     ...mapActions(['clearProductIdb']),
     ...mapActions('cart', ['initializeCart']),
     ...mapActions('checkout', ['initializeCheckout']),
     ...mapActions('user', ['readSession']),
-    ...mapActions('search', ['getSearchData']),
-    ...mapActions('wishlist', ['getWishlists'])
+    ...mapActions('search', ['getSearchData'])
   }
 }
 </script>

@@ -44,13 +44,6 @@
         :variant="selectedVariant"
         :quantity="quantity"
       />
-      <product-add-to-wishlist-button
-        class="circle-button is-primary"
-        :variant="selectedVariant"
-        :product="product"
-      >
-        <template #icon />
-      </product-add-to-wishlist-button>
     </div>
   </div>
 </template>

@@ -32,8 +32,7 @@ export default function (context, inject) {
     data: client.data,
     checkout: client.checkout,
     events: client.events,
-    status: client.status,
-    wishlist: client.wishlist
+    status: client.status
   }
 
   inject('nacelle', plugin)
