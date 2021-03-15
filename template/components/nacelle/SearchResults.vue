@@ -1,17 +1,23 @@
 <template>
   <div>
     <transition name="fade" mode="out-in">
-      <div v-if="isLoading" key="loading">
+      <div v-if="internalState === 'loading'" key="loading">
         <slot name="loading" />
       </div>
+
       <div
-        v-else-if="globalResults.length"
+        v-if="internalState === 'results'"
         key="results"
         class="search-results"
       >
         <slot name="result" :result="globalResults" />
       </div>
-      <div v-else key="no-results" class="no-results">
+
+      <div
+        v-if="internalState === 'no-results'"
+        key="no-results"
+        class="no-results"
+      >
         <slot name="no-results" />
       </div>
     </transition>
@@ -28,10 +34,25 @@ export default {
       default: null
     }
   },
+  data() {
+    return {
+      internalState: 'initial'
+    }
+  },
   computed: {
     ...mapState('search', ['isLoading', 'globalResults'])
   },
   watch: {
+    isLoading() {
+      this.internalState = 'loading'
+    },
+    globalResults() {
+      if (this.globalResults.length === 0) {
+        this.internalState = 'no-results'
+      } else {
+        this.internalState = 'results'
+      }
+    },
     searchQuery(newVal) {
       if (newVal && String(newVal) !== '') {
         this.setAutocompleteVisible(true)
