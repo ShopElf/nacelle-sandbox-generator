@@ -86,98 +86,123 @@ export const defaultProduct2 = {
 }
 
 export const defaultMultivariate = {
-  variants: [
-    {
-      id: 'Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8yODg3MjA2MTcxNDUzNw==',
-      title: 'Small / Red',
-      price: '43.0',
-      availableForSale: true,
-      selectedOptions: [
-        { name: 'Size', value: 'Small', __typename: 'SelectedOption' },
-        { name: 'Color', value: 'Red', __typename: 'SelectedOption' }
-      ],
-      __typename: 'Variant'
-    },
-    {
-      id: 'Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8yODgzNTQ4OTkwNjc5Mw==',
-      title: 'Medium / Red',
-      price: '43.0',
-      availableForSale: true,
-      selectedOptions: [
-        { name: 'Size', value: 'Medium', __typename: 'SelectedOption' },
-        { name: 'Color', value: 'Red', __typename: 'SelectedOption' }
-      ],
-      __typename: 'Variant'
-    },
-    {
-      id: 'Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8yODg3MjA2MjQwMjY2NQ==',
-      title: 'Large / Red',
-      price: '43.0',
-      availableForSale: true,
-      selectedOptions: [
-        { name: 'Size', value: 'Large', __typename: 'SelectedOption' },
-        { name: 'Color', value: 'Red', __typename: 'SelectedOption' }
-      ],
-      __typename: 'Variant'
-    },
-    {
-      id: 'Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8yODg3MjA2MjkyNjk1Mw==',
-      title: 'Small / Blue',
-      price: '43.0',
-      availableForSale: true,
-      selectedOptions: [
-        { name: 'Size', value: 'Small', __typename: 'SelectedOption' },
-        { name: 'Color', value: 'Blue', __typename: 'SelectedOption' }
-      ],
-      __typename: 'Variant'
-    },
-    {
-      id: 'Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8yODg3MjA2MzYxNTA4MQ==',
-      title: 'Medium / Blue',
-      price: '43.0',
-      availableForSale: true,
-      selectedOptions: [
-        { name: 'Size', value: 'Medium', __typename: 'SelectedOption' },
-        { name: 'Color', value: 'Blue', __typename: 'SelectedOption' }
-      ],
-      __typename: 'Variant'
-    }
-  ],
+  id: 'pepper-wood-apparel.myshopify.com::alonso-shoes::en-us',
+  handle: 'alonso-shoes',
+  locale: 'en-us',
+  globalHandle: 'alonso-shoes::en-us',
+  pimSyncSourceDomain: 'pepper-wood-apparel.myshopify.com',
+  title: 'Alonso Shoes',
+  description:
+    '<p>She packed her seven versalia, put her initial into the belt and made herself on the way.</p>',
+  priceRange: { min: '140.0', max: '140.01', currencyCode: 'USD' },
+  availableForSale: true,
+  tags: ['filter_color_black', 'footwear', 'men'],
   media: [
     {
+      id: 'Z2lkOi8vc2hvcGlmeS9JbWFnZVNvdXJjZS84NDYxODg1MjEwNzU5',
       thumbnailSrc:
-        'https://cdn.shopify.com/s/files/1/0248/6308/0553/products/young-man-in-bright-fashion_925x_8565e071-cb7b-4688-9c5b-bce928c71020.jpg?v=1561603361&width=250',
-      id: 'Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvMTEzNzgyMDY5OTg2MzM=',
+        'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-1122605.jpg?v=1587622908&width=100',
       src:
-        'https://cdn.shopify.com/s/files/1/0248/6308/0553/products/young-man-in-bright-fashion_925x_8565e071-cb7b-4688-9c5b-bce928c71020.jpg?v=1561603361&width=750',
+        'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-1122605.jpg?v=1587622908',
       type: 'image',
-      __typename: 'Media'
+      altText: 'Alonso Shoes'
     }
   ],
-  id: 'Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzM1OTkyMDE4NjE3Mzc=',
-  title: 'Ocean Blue Shirt',
-  handle: 'ocean-blue-shirt',
-  description:
-    'Ocean blue cotton shirt with a narrow collar and buttons down the front and long sleeves. Comfortable fit and tiled kalidoscope patterns.',
-  priceRange: { min: '43.0', max: '43.0', __typename: 'PriceRange' },
-  options: [
-    {
-      name: 'Size',
-      values: ['Small', 'Medium', 'Large'],
-      __typename: 'ProductOption'
-    },
-    { name: 'Color', values: ['Red', 'Blue'], __typename: 'ProductOption' }
+  metafields: [
+    { id: null, namespace: 'global', key: 'seo-url', value: 'best-shoes-ever' }
   ],
+  variants: [
+    {
+      id: 'Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zNDYwMjMwNjQzNzI1NQ==',
+      title: '9',
+      price: '140.01',
+      priceCurrency: 'USD',
+      compareAtPrice: null,
+      compareAtPriceCurrency: null,
+      swatchSrc: null,
+      selectedOptions: [{ name: 'Size', value: '9' }],
+      featuredMedia: {
+        id: 'Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvMTYyODQ5MTgzODI3Mjc=',
+        thumbnailSrc:
+          'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-1122605.jpg?v=1601570708&width=100',
+        src:
+          'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-1122605.jpg?v=1601570708',
+        type: 'image',
+        altText: 'Alonso Shoes'
+      },
+      sku: null,
+      availableForSale: true,
+      metafields: [],
+      weight: null,
+      weightUnit: null,
+      priceRules: null
+    },
+    {
+      id: 'Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zNDYwMjMwNjQ3MDAyMw==',
+      title: '10',
+      price: '140.0',
+      priceCurrency: 'USD',
+      compareAtPrice: null,
+      compareAtPriceCurrency: null,
+      swatchSrc: null,
+      selectedOptions: [{ name: 'Size', value: '10' }],
+      featuredMedia: {
+        id: 'Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvMTYyODQ5MTgzODI3Mjc=',
+        thumbnailSrc:
+          'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-1122605.jpg?v=1601570708&width=100',
+        src:
+          'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-1122605.jpg?v=1601570708',
+        type: 'image',
+        altText: 'Alonso Shoes'
+      },
+      sku: null,
+      availableForSale: true,
+      metafields: [],
+      weight: null,
+      weightUnit: null,
+      priceRules: null
+    },
+    {
+      id: 'Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zNDYwMjMwNjUwMjc5MQ==',
+      title: '11',
+      price: '140.0',
+      priceCurrency: 'USD',
+      compareAtPrice: null,
+      compareAtPriceCurrency: null,
+      swatchSrc: null,
+      selectedOptions: [{ name: 'Size', value: '11' }],
+      featuredMedia: {
+        id: 'Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvMTYyODQ5MTgzODI3Mjc=',
+        thumbnailSrc:
+          'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-1122605.jpg?v=1601570708&width=100',
+        src:
+          'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-1122605.jpg?v=1601570708',
+        type: 'image',
+        altText: 'Alonso Shoes'
+      },
+      sku: null,
+      availableForSale: true,
+      metafields: [],
+      weight: null,
+      weightUnit: null,
+      priceRules: null
+    }
+  ],
+  indexedAt: 1615923830,
+  pimSyncSource: 'shopify',
+  pimSyncSourceProductId: 'Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzQ5MTU2OTY0MzUzMzU=',
+  productType: 'Shoes',
   featuredMedia: {
-    src:
-      'https://cdn.shopify.com/s/files/1/0248/6308/0553/products/young-man-in-bright-fashion_925x_8565e071-cb7b-4688-9c5b-bce928c71020.jpg?v=1561603361&width=750',
+    id: 'Z2lkOi8vc2hvcGlmeS9JbWFnZVNvdXJjZS84NDYxODg1MjEwNzU5',
     thumbnailSrc:
-      'https://cdn.shopify.com/s/files/1/0248/6308/0553/products/young-man-in-bright-fashion_925x_8565e071-cb7b-4688-9c5b-bce928c71020.jpg?v=1561603361&width=250',
-    id: 'Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvMTEzNzgyMDY5OTg2MzM=',
+      'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-1122605.jpg?v=1587622908&width=100',
+    src:
+      'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-1122605.jpg?v=1587622908',
     type: 'image',
-    __typename: 'Media'
+    altText: 'Alonso Shoes'
   },
-  __typename: 'Product'
+  vendor: 'Prairie Wind Apparel',
+  createdAt: 1587622908
 }
 
 export const defaultLineItem = {
