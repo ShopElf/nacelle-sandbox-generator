@@ -17,5 +17,10 @@ describe('RadioInput.vue', () => {
     expect(wrapper.vm.checked).toBe(true)
   })
 
-  // TODO: [DRAMS-1340] expect(input.attributes('aria-checked')).toBe('true')
+  it('has aria-checked be true when is checked', async () => {
+    await wrapper.setProps({
+      checked: true
+    })
+    expect(input.attributes('aria-checked')).toBe('true')
+  })
 })

@@ -48,7 +48,7 @@ export default {
       return this.$attrs.inputValue === this.value
     },
     preChecked() {
-      return this.$attrs.inputValue === null && this.checked
+      return (!this.$attrs.inputValue && this.checked) || this.currentlyChecked
     }
   }
 }
