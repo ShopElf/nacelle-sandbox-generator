@@ -2,7 +2,8 @@
   <router-link :to="`${pathFragment}${item.handle}`">
     <div class="columns is-marginless is-mobile nacelle is-vcentered">
       <nacelle-image
-        :src="item.featuredMedia.thumbnailSrc"
+        v-if="productThumbnail"
+        :src="productThumbnail"
         :width="150"
         :height="150"
         class="autocomplete-thumb"
@@ -11,6 +12,7 @@
         {{ item.title }}
       </h3>
       <product-price
+        v-if="productPriceProps"
         v-bind="productPriceProps"
         class="column is-3 is-marginless"
       />
@@ -24,13 +26,20 @@ export default {
     item: {
       type: Object,
       required: true
-    },
-    pathFragment: {
-      type: String,
-      default: '/products/'
     }
   },
   computed: {
+    pathFragment() {
+      // customize this as needed to route to different `searchDataTypes` listed in nuxt.config.js
+      const typePathMap = {
+        article: '/blog/',
+        blog: '',
+        page: '/pages/',
+        default: '/products/'
+      }
+
+      return typePathMap[this.item.type] || typePathMap.default
+    },
     productThumbnail() {
       return this.item?.featuredMedia?.thumbnailSrc
     },

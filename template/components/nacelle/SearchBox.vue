@@ -37,7 +37,7 @@ export default {
     },
     placeholderText: {
       type: String,
-      default: 'Search products...'
+      default: 'Search...'
     }
   },
   methods: {

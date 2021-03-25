@@ -1,7 +1,5 @@
 export const state = () => ({
-  searchData: {
-    products: []
-  },
+  searchData: [],
   searchOptions: {
     relevanceThreshold: 0.5,
     keys: ['title']
@@ -14,7 +12,7 @@ export const state = () => ({
   isSearchingGlobal: false,
   autocompleteVisible: false,
 
-  // in-page search state
+  // search page state
   pageQuery: null,
   pageResults: [],
   filteredData: null,
@@ -23,12 +21,11 @@ export const state = () => ({
 })
 
 export const getters = {
-  hasProductData(state) {
-    return state.searchData.products.length > 0
+  hasSearchData(state) {
+    return state.searchData.length > 0
   },
-
-  productData(state, getters) {
-    return getters.hasProductData ? state.searchData.products : []
+  searchPageData(state) {
+    return state.searchData.filter((item) => 'facets' in item)
   }
 }
 
@@ -55,11 +52,8 @@ export const mutations = {
     state.autocompleteVisible = isVisible
   },
 
-  setSearchData(state, data) {
-    state.searchData = {
-      ...state.searchData,
-      ...data
-    }
+  setSearchData(state, searchData) {
+    state.searchData = searchData
   },
 
   setLoading(state, isLoading) {
@@ -81,7 +75,7 @@ export const mutations = {
 
 export const actions = {
   getSearchData({ commit, getters, state }) {
-    if (getters.hasProductData && !state.isLoading) {
+    if (getters.hasSearchData && !state.isLoading) {
       return
     }
     commit('setLoading', true)
@@ -89,15 +83,21 @@ export const actions = {
     const worker = new Worker('/worker/productCatalog.js')
     worker.postMessage(null)
     worker.onmessage = (e) => {
-      const products = e.data.product
-      commit('setSearchData', { products })
+      try {
+        const searchData = Object.values(e.data).flat()
+        commit('setSearchData', searchData)
+      } catch (error) {
+        console.error(error)
+      }
       commit('setLoading', false)
       worker.terminate()
     }
   },
 
   searchCatalog({ state, getters, commit }, { value, position }) {
-    commit('startSearchWorker', getters.productData)
+    const searchData =
+      position === 'global' ? state.searchData : getters.searchPageData
+    commit('startSearchWorker', searchData)
     commit('setSearchingGlobal', true)
 
     state.searchWorker.postMessage({
