@@ -113,17 +113,6 @@ export default {
     }
   },
 
-  storybook: {
-    parameters: {
-      showPanel: false
-    },
-    addons: [
-      '@storybook/addon-actions',
-      '@storybook/addon-knobs',
-      '@storybook/addon-links',
-      '@storybook/addon-docs'
-    ]
-  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     extend(config) {
