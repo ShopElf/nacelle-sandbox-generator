@@ -1,34 +1,22 @@
 onmessage = function (e) {
-  const vm = e.data
+  const { filteredData, activePriceRange, sortBy } = e.data
 
-  const output = vm.filteredData.filter((item) => {
-    if (vm.activePriceRange) {
-      if (vm.activePriceRange.range[0] === 0) {
-        if (parseFloat(item.minPrice) < vm.activePriceRange.range[1]) {
-          return true
-        } else {
-          return false
-        }
-      } else if (vm.activePriceRange.range[1] === 0) {
-        if (parseFloat(item.minPrice) > vm.activePriceRange.range[0]) {
-          return true
-        } else {
-          return false
-        }
-      } else if (
-        parseFloat(item.minPrice) > vm.activePriceRange.range[0] &&
-        parseFloat(item.minPrice) < vm.activePriceRange.range[1]
-      ) {
-        return true
+  const output = filteredData.filter(({ minPrice }) => {
+    if (activePriceRange) {
+      const [min, max] = activePriceRange.range
+      if (min === 0) {
+        return minPrice < max
+      } else if (max === 0) {
+        return minPrice > min
       } else {
-        return false
+        return minPrice > min && parseFloat(minPrice) < max
       }
     } else {
       return true
     }
   })
 
-  switch (vm.sortBy) {
+  switch (sortBy) {
     case 'hi-low':
       postMessage(
         output.sort((a, b) => {

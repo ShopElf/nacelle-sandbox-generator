@@ -1,10 +1,10 @@
 const stories = ['../components/**/*.stories.@(ts|js)']
 const addons = [
+  '@storybook/addon-docs',
   '@storybook/addon-essentials',
   '@storybook/addon-actions',
   '@storybook/addon-knobs',
-  '@storybook/addon-links',
-  '@storybook/addon-docs'
+  '@storybook/addon-links'
 ]
 
 function nuxifyStorybook(storybookConfig) {

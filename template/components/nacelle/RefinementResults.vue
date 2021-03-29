@@ -52,15 +52,19 @@ export default {
     }
   },
   watch: {
-    searchData(newData, oldData) {
-      if (
-        newData.map((p) => p.handle).join('') !==
-        oldData.map((p) => p.handle).join('')
-      ) {
-        this.resultsToDisplay = 12
-        this.loadedResults = []
-      }
-      this.fetchProducts(0, this.resultsToDisplay + this.fetchBuffer)
+    searchData: {
+      handler(newData, oldData) {
+        if (
+          oldData &&
+          newData.map((p) => p.handle).join('') !==
+            oldData.map((p) => p.handle).join('')
+        ) {
+          this.resultsToDisplay = 12
+          this.loadedResults = []
+        }
+        this.fetchProducts(0, this.resultsToDisplay + this.fetchBuffer)
+      },
+      immediate: true
     }
   },
 

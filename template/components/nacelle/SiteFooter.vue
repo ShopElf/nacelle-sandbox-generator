@@ -52,7 +52,7 @@ export default {
   display: flex;
   justify-content: center;
 
-  @media screen and (max-width: 786px) {
+  @media screen and (max-width: 768px) {
     align-content: center;
   }
 }

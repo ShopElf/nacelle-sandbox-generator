@@ -2,7 +2,7 @@
   <transition name="fade-up">
     <div
       v-show="autocompleteVisible"
-      class="autocomplete is-hidden-mobile"
+      class="autocomplete"
       @mouseenter="cursorInside = true"
       @mouseleave="mouseLeave"
     >
@@ -75,7 +75,7 @@ export default {
   padding: 1rem;
   box-shadow: -1px 4px 7px 0px rgba(0, 0, 0, 0.08);
 
-  @media screen and (max-width: 786px) {
+  @media screen and (max-width: 768px) {
     right: 0;
     left: 0;
     width: 100%;

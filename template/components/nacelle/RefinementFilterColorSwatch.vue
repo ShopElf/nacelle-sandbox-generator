@@ -18,21 +18,21 @@ export default {
   },
   computed: {
     colorCode() {
-      switch (this.color) {
-        case 'Light Gray':
+      switch (this.color.toLowerCase()) {
+        case 'light-gray':
           return '#b4abab'
-        case 'Light Brown':
+        case 'light-brown':
           return '#e6dabf'
-        case 'Brown':
+        case 'brown':
           return '#D2691E'
-        case 'Blue':
+        case 'blue':
           return '#719ec5'
-        case 'Blue Gray':
+        case 'blue-gray':
           return '#627579'
-        case 'Black':
+        case 'black':
           return '#292929'
         default:
-          return '#fff'
+          return this.color.toLowerCase()
       }
     }
   }
@@ -52,8 +52,8 @@ export default {
   align-items: center;
 }
 .color-swatch-inner {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   border-radius: 16px;
 }
 .selected {

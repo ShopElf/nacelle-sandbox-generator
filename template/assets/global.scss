@@ -107,13 +107,13 @@ span {
   justify-content: flex-end;
   flex-grow: 1;
 
-  @media screen and (max-width: 786px) {
+  @media screen and (max-width: 768px) {
     flex-grow: unset;
   }
 }
 
 .main-nav-brand {
-  @media screen and (max-width: 786px) {
+  @media screen and (max-width: 768px) {
     margin-left: -1rem;
   }
 }

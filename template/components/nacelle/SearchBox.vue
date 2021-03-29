@@ -14,7 +14,6 @@
     >
       Search
     </button>
-    <search-autocomplete v-if="position === 'global'" />
   </div>
 </template>
 
@@ -26,10 +25,6 @@ export default {
     position: {
       type: String,
       default: 'global'
-    },
-    searchCategory: {
-      type: String,
-      default: 'product'
     },
     searchQuery: {
       type: String,

@@ -86,6 +86,9 @@ const transformProductData = (product) => {
     facets.push({ name: 'productType', value: productType })
   }
 
+  // cast priceRange values as numbers
+  rest.priceRange.min = Number(rest.priceRange.min)
+  rest.priceRange.max = Number(rest.priceRange.max)
   rest.minPrice = rest.priceRange.min
 
   return { ...rest, productType, tags, variants, facets }

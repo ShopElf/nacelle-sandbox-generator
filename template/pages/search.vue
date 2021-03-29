@@ -75,12 +75,15 @@ export default {
   watch: {
     isLoading(newVal) {
       if (!newVal && this.$route.query?.q) {
-        this.searchCatalog({ value: this.$route.query.q, position: 'page' })
+        this.searchCatalog({
+          value: this.$route.query.q,
+          position: this.position
+        })
       }
     },
     pageQuery(newVal) {
       if (newVal && String(newVal) !== '') {
-        this.searchCatalog({ value: newVal, position: 'page' })
+        this.searchCatalog({ value: newVal, position: this.position })
       }
     }
   },

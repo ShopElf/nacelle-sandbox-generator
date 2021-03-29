@@ -25,6 +25,7 @@ export const getters = {
     return state.searchData.length > 0
   },
   searchPageData(state) {
+    // this will only return products on the search page
     return state.searchData.filter((item) => 'facets' in item)
   }
 }

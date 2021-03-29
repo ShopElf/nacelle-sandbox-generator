@@ -25,10 +25,13 @@
             {{ link.title }}
           </nuxt-link>
         </div>
-        <search-box
-          v-bind="{ searchQuery: globalQuery }"
-          class="is-hidden-mobile"
-        />
+        <div>
+          <search-box
+            v-bind="{ searchQuery: globalQuery }"
+            class="is-hidden-mobile"
+          />
+          <search-autocomplete />
+        </div>
         <main-nav-cart />
       </div>
     </div>

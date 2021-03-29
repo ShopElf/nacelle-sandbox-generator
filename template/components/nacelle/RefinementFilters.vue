@@ -172,18 +172,26 @@ export default {
       if (vm.inputData && vm.propertyFilters) {
         vm.filters = vm.inputData
           .reduce((output, item) => {
-            item.facets
-              .filter((facet) => facet.name !== 'Title')
-              .forEach((facet) => {
-                const index = output.findIndex((arrayItem) => {
-                  return facet.name === arrayItem.property
+            if (!item.facets) {
+              console.warn(
+                `No facets have been generated for this item: ${
+                  item.handle || item
+                }`
+              )
+            } else {
+              item.facets
+                .filter((facet) => facet.name.toLowerCase() !== 'title')
+                .forEach((facet) => {
+                  const index = output.findIndex((arrayItem) => {
+                    return facet.name === arrayItem.property
+                  })
+                  if (index === -1) {
+                    output.push({ property: facet.name, values: [facet.value] })
+                  } else {
+                    output[index].values.push(facet.value)
+                  }
                 })
-                if (index === -1) {
-                  output.push({ property: facet.name, values: [facet.value] })
-                } else {
-                  output[index].values.push(facet.value)
-                }
-              })
+            }
             return output
           }, [])
           .map((facet) => {
@@ -367,7 +375,7 @@ export default {
 .filters {
   display: flex;
   justify-content: space-between;
-  @media screen and (max-width: 786px) {
+  @media screen and (max-width: 768px) {
     flex-direction: column;
   }
 }
@@ -377,7 +385,7 @@ export default {
 
   flex-grow: 3;
   margin-bottom: 0.5rem;
-  @media screen and (max-width: 786px) {
+  @media screen and (max-width: 768px) {
     border: none;
     margin-bottom: 2rem;
   }
@@ -388,7 +396,7 @@ export default {
 }
 .facet-values {
   columns: 3;
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 1215px) {
     columns: 2;
   }
   @media screen and (max-width: 950px) {
