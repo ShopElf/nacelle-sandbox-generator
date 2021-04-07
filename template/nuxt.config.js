@@ -1,5 +1,3 @@
-import generateRoutes from './nacelle-routing/generateRoutes'
-
 export default {
   target: 'static',
 
@@ -32,7 +30,7 @@ export default {
     contentAssetStorage: process.env.CONTENT_ASSET_STORAGE || '',
     nacelleId: process.env.NACELLE_SPACE_ID,
     nacelleToken: process.env.NACELLE_GRAPHQL_TOKEN,
-    nacelleEndpoint: 'https://hailfrequency.com/v2/graphql'
+    nacelleEndpoint: process.env.NACELLE_ENDPOINT
   },
   privateRuntimeConfig: {},
 
@@ -44,7 +42,11 @@ export default {
   },
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: ['@nuxtjs/eslint-module', 'nuxt-purgecss'],
+  buildModules: [
+    '@nuxtjs/eslint-module',
+    'nuxt-purgecss',
+    '~/modules/nacelle-routes'
+  ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
@@ -83,10 +85,7 @@ export default {
 
   generate: {
     crawler: false,
-    concurrency: 25,
-    async routes() {
-      return await generateRoutes()
-    }
+    concurrency: 25
   },
 
   polyfill: {

@@ -12,7 +12,11 @@
       <div class="article-hero">
         <transition name="fade">
           <nacelle-image
-            v-if="article && article.featuredMedia"
+            v-if="
+              article &&
+              article.featuredMedia.file &&
+              article.featuredMedia.file.url
+            "
             :src="article.featuredMedia.file.url"
             :width="400"
           />
