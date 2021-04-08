@@ -68,7 +68,8 @@ export default {
    */
   nacelle: {
     spaceID: process.env.NACELLE_SPACE_ID,
-    token: process.env.NACELLE_GRAPHQL_TOKEN
+    token: process.env.NACELLE_GRAPHQL_TOKEN,
+    endpoint: process.env.NACELLE_ENDPOINT
 
     /* Optional */
     // Set the default internationalization locales string for Nacelle to use
@@ -77,10 +78,6 @@ export default {
     // Optional array of data type strings to direct Nacelle to include other data types
     // besides products in search data.
     // searchDataTypes: ['article', 'page', 'blog'],
-
-    // If you wish to set the Nacelle GraphQL endpoint to something other than the
-    // default.
-    // customEndpoint: process.env.NACELLE_CUSTOM_ENDPOINT
   },
 
   generate: {

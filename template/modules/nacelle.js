@@ -11,9 +11,7 @@ module.exports = async function (moduleOptions) {
     ...this.options.nacelle,
     ...moduleOptions,
     locale: this.options.nacelle.locale || 'en-us',
-    endpoint:
-      this.options.nacelle.customEndpoint ||
-      'https://hailfrequency.com/v2/graphql'
+    endpoint: this.options.nacelle.endpoint
   }
 
   const client = new NacelleClient({
