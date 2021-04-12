@@ -29,7 +29,6 @@
 
 <script>
 import { mapActions } from 'vuex'
-import productModule from '~/store/product/productModule'
 
 export default {
   data() {
@@ -101,14 +100,7 @@ export default {
   mounted() {
     if (this.collection) {
       this.collectionProducts.forEach((product) => {
-        const namespace = `product/${product.handle}`
-        if (!this.$store.hasModule(namespace)) {
-          this.$store.registerModule(namespace, productModule(), {
-            preserveState: !!this.$store.state[namespace]
-          })
-          this.$store.dispatch(`${namespace}/setupProduct`, product)
-        }
-        this.$store.dispatch(`${namespace}/storeProduct`, product)
+        this.$registerProduct(product.handle)
       })
       this.collectionView({ collection: this.collection })
     }
@@ -147,16 +139,7 @@ export default {
           return handle
         })
         .map(async (handle, index) => {
-          const namespace = `product/${handle}`
-          if (!this.$store.hasModule(namespace)) {
-            this.$store.registerModule(namespace, productModule(), {
-              preserveState: !!this.$store.state[namespace]
-            })
-          }
-          const product = await this.$store.dispatch(
-            `${namespace}/fetchProduct`,
-            handle
-          )
+          const product = await this.$fetchProduct(handle)
           this.$set(this.collectionProducts, index + start, product)
         })
 

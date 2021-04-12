@@ -49,7 +49,6 @@
 
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex'
-import productModule from '~/store/product/productModule'
 import productMetafields from '~/mixins/productMetafields'
 
 export default {
@@ -61,19 +60,7 @@ export default {
     }
   },
   async fetch() {
-    const handle = this.$route.params.productHandle
-    this.namespace = `product/${handle}`
-    if (!this.$store.hasModule(this.namespace)) {
-      this.$store.registerModule(this.namespace, productModule(), {
-        preserveState: !!this.$store.state[this.namespace]
-      })
-    }
-    const product = await this.$store.dispatch(
-      `${this.namespace}/fetchProduct`,
-      handle
-    )
-
-    this.product = product
+    this.product = await this.$fetchProduct(this.$route.params.productHandle)
   },
   head() {
     if (this.product) {
@@ -127,6 +114,9 @@ export default {
     ...mapGetters('space', ['getMetatag'])
   },
   mounted() {
+    this.namespace = `product/${this.$route.params.productHandle}`
+    this.$registerProduct(this.$route.params.productHandle)
+
     if (this.$store.state[this.namespace]) {
       const { product, selectedVariant } = this.$store.state[this.namespace]
       this.productView({ product, selectedVariant })
@@ -134,8 +124,7 @@ export default {
   },
 
   beforeDestroy() {
-    const namespace = `product/${this.product.handle}`
-    this.$store.commit(`${namespace}/unloadProduct`)
+    this.$store.commit(`${this.namespace}/unloadProduct`)
   },
   methods: {
     ...mapMutations('cart', ['showCart']),
