@@ -15,7 +15,8 @@ function handleCheckoutError(err) {
 
 export const state = () => ({
   id: null,
-  url: null
+  url: null,
+  discountCode: null
 })
 
 export const mutations = {
@@ -34,6 +35,12 @@ export const mutations = {
     set('checkout-url', url)
     state.id = id
     state.url = url
+  },
+
+  setDiscountCode(state, payload) {
+    if (payload && payload.trim()) {
+      state.discountCode = payload
+    }
   }
 }
 

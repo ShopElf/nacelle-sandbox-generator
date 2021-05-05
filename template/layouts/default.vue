@@ -12,7 +12,8 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
+import queryString from 'query-string'
 import LazyHydrate from 'vue-lazy-hydration'
 export default {
   components: { LazyHydrate },
@@ -77,6 +78,7 @@ export default {
     await this.initializeCart()
     await this.clearProductIdb()
     this.getSearchData()
+    this.setDiscountCode(queryString.parse(location.search).discount)
     this.readSession()
   },
   methods: {
@@ -84,7 +86,8 @@ export default {
     ...mapActions('cart', ['initializeCart']),
     ...mapActions('checkout', ['initializeCheckout']),
     ...mapActions('user', ['readSession']),
-    ...mapActions('search', ['getSearchData'])
+    ...mapActions('search', ['getSearchData']),
+    ...mapMutations('checkout', ['setDiscountCode'])
   }
 }
 </script>
