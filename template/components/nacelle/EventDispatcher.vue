@@ -40,6 +40,12 @@ export default {
             this.facebookProductView()
             this.googleAnalyticsProductView()
             break
+          case 'PRODUCT_SELECT':
+            this.googleAnalyticsProductSelect()
+            break
+          case 'COLLECTION_VIEW':
+            this.googleAnalyticsCollectionView()
+            break
           case 'ADD_TO_CART':
             this.facebookAddToCart()
             this.googleAnalyticsAddToCart()
@@ -47,8 +53,10 @@ export default {
           case 'REMOVE_FROM_CART':
             this.googleAnalyticsRemoveFromCart()
             break
+
           case 'CHECKOUT_INIT':
             this.facebookCheckoutInitiate()
+            this.googleCheckoutInitiate()
             break
         }
       }
@@ -61,6 +69,14 @@ export default {
       const variantId = variantIdString.split('gid://shopify/Product/')[1]
 
       return variantId
+    },
+    decodeBase64CollecionId(encodedId) {
+      const collectionIdBase64 = encodedId.split('::')[0]
+      const collectionIdString = decode(collectionIdBase64)
+      const collectionId = collectionIdString.split(
+        'gid://shopify/Collection/'
+      )[1]
+      return collectionId
     },
     decodeBase64VariantId(encodedId) {
       const variantIdBase64 = encodedId.split('::')[0]
@@ -98,12 +114,51 @@ export default {
     },
     googleAnalyticsProductView() {
       if (typeof this.ga !== 'undefined') {
-        this.ga('ec:addProduct', {
-          id: this.decodeBase64ProductId(this.logEntry.payload.product.id),
-          name: this.logEntry.payload.product.title
-        })
-        this.ga('ec:setAction', 'detail')
         this.ga('send', 'pageview')
+        this.ga('send', 'event', 'view_item', {
+          currency: this.logEntry.user.locale.currency,
+          items: [
+            {
+              item_id: this.decodeBase64ProductId(
+                this.logEntry.product.pimSyncSourceProductId
+              ),
+              item_name: this.logEntry.product.title,
+              item_variant: this.logEntry.selectedVariant.title,
+              price: this.logEntry.selectedVariant.price,
+              currency: this.logEntry.user.locale.currency
+            }
+          ],
+          value: this.logEntry.selectedVariant.price
+        })
+      }
+    },
+
+    /// / PRODUCT SELECT METHODS ///////////////////////////////
+
+    googleAnalyticsProductSelect() {
+      if (typeof this.ga !== 'undefined') {
+        this.ga('send', 'event', 'select_item', {
+          items: [
+            {
+              item_name: this.logEntry.payload.product.title,
+              price: this.logEntry.payload.product.minPrice,
+              currency: this.logEntry.user.locale.currency
+            }
+          ]
+        })
+      }
+    },
+
+    /// / COLLECTION VIEW METHODS ///////////////////////////////
+
+    googleAnalyticsCollectionView() {
+      if (typeof this.ga !== 'undefined') {
+        this.ga('send', 'event', 'view_item_list', {
+          item_list_name: this.logEntry.collection.title,
+          item_list_id: this.decodeBase64CollecionId(
+            this.logEntry.collection.id
+          )
+        })
       }
     },
 
@@ -124,13 +179,22 @@ export default {
     },
     googleAnalyticsAddToCart() {
       if (typeof this.ga !== 'undefined') {
-        this.ga('ec:addProduct', {
-          id: this.decodeBase64ProductId(
-            this.logEntry.payload.product.variant.id
-          ),
-          name: this.logEntry.payload.product.variant.title
+        this.ga('send', 'event', 'add_to_cart', {
+          currency: this.logEntry.user.locale.currency,
+          items: [
+            {
+              item_id: this.decodeBase64ProductId(
+                this.logEntry.payload.product.variant.id
+              ),
+              item_name: this.logEntry.payload.product.title,
+              item_variant: this.logEntry.payload.product.variant.title,
+              price: this.logEntry.payload.product.variant.price,
+              currency: this.logEntry.user.locale.currency,
+              quantity: this.logEntry.payload.product.quantity
+            }
+          ],
+          value: this.logEntry.payload.product.variant.price
         })
-        this.ga('ec:setAction', 'add')
         this.ga('send', 'event', 'UX', 'click', 'add to cart')
       }
     },
@@ -138,11 +202,23 @@ export default {
     /// / REMOVE FROM CART METHODS ///////////////////////////////
     googleAnalyticsRemoveFromCart() {
       if (typeof this.ga !== 'undefined') {
-        this.ga('ec:addProduct', {
-          id: this.logEntry.payload.product.variant.id,
-          name: this.logEntry.payload.product.variant.title
+        this.ga('send', 'event', 'remove_from_cart', {
+          currency: this.logEntry.user.locale.currency,
+          items: [
+            {
+              item_id: this.decodeBase64ProductId(
+                this.logEntry.payload.product.variant.id
+              ),
+              item_name: this.logEntry.payload.product.title,
+              item_variant: this.logEntry.payload.product.variant.title,
+              price: this.logEntry.payload.product.variant.price,
+              currency: this.logEntry.user.locale.currency,
+              quantity: this.logEntry.payload.product.quantity
+            }
+          ],
+          value: this.logEntry.payload.product.variant.price
         })
-        this.ga('ec:setAction', 'remove')
+
         this.ga('send', 'event', 'UX', 'click', 'remove from cart')
       }
     },
@@ -157,6 +233,27 @@ export default {
           content_type: 'product',
           num_items: this.quantityTotal,
           product_catalog_id: this.facebookCatalogID
+        })
+      }
+    },
+    googleCheckoutInitiate() {
+      if (typeof this.ga !== 'undefined') {
+        this.ga('send', 'event', 'begin_checkout', {
+          currency: this.logEntry.user.locale.currency,
+          items: this.lineItems.map((product) => {
+            return {
+              item_id: this.decodeBase64ProductId(product.variant.id),
+              item_name: product.title,
+              item_variant: product.variant.title,
+              price: product.variant.price,
+              currency: this.logEntry.user.locale.currency,
+              quantity: product.quantity
+            }
+          }),
+          value: this.lineItems.reduce(
+            (val, product) => val + parseFloat(product.variant.price),
+            0
+          )
         })
       }
     }

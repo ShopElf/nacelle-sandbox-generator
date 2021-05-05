@@ -131,6 +131,16 @@ export const actions = {
         ...eventProperties(rootState)
       })
     }
+  },
+
+  productSelect({ commit, rootState }, payload) {
+    if (payload) {
+      commit('addEvent', {
+        eventType: 'PRODUCT_SELECT',
+        payload,
+        ...eventProperties(rootState)
+      })
+    }
   }
 }
 

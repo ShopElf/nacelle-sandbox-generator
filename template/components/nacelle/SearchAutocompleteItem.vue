@@ -1,6 +1,9 @@
 <template>
   <router-link :to="`${pathFragment}${item.handle}`">
-    <div class="columns is-marginless is-mobile nacelle is-vcentered">
+    <div
+      class="columns is-marginless is-mobile nacelle is-vcentered"
+      @click="productSelect({ product: item })"
+    >
       <nacelle-image
         v-if="productThumbnail"
         :src="productThumbnail"
@@ -21,6 +24,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   props: {
     item: {
@@ -53,6 +58,9 @@ export default {
       }
       return null
     }
+  },
+  methods: {
+    ...mapActions('events', ['productSelect'])
   }
 }
 </script>
