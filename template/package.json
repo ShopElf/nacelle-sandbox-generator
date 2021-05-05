@@ -6,6 +6,7 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
+    "storybook": "nuxt storybook",
     "storybook:serve": "nuxt-storybook",
     "storybook:build": "nuxt storybook build",
     "generate": "nuxt generate",
