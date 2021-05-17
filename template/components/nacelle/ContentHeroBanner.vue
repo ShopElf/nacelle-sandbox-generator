@@ -97,11 +97,16 @@ export default {
   },
   computed: {
     bannerClasses() {
-      const mobileHeightClass = this.mobileFullHeight
-        ? 'is-mobile-fullheight'
-        : ''
-
-      return `hero nacelle is-${this.size} is-align-${this.alignment} ${mobileHeightClass}`
+      return [
+        'hero',
+        'nacelle',
+        { [`is-medium`]: this.size === 'medium' },
+        { [`is-large`]: this.size === 'large' },
+        { [`is-fullheight`]: this.size === 'fullheight' },
+        { [`is-align-center`]: this.alignment === 'center' },
+        { [`is-align-right`]: this.alignment === 'right' },
+        { [`is-mobile-fullheight`]: this.mobileFullHeight }
+      ]
     },
     imageUrl() {
       return this.featuredMedia?.fields?.file?.url
