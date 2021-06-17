@@ -28,6 +28,7 @@ export default {
       return process.client ? window.ga : undefined
     }
   },
+
   watch: {
     log() {
       if (process.client) {
@@ -95,7 +96,7 @@ export default {
     },
     googleAnalyticsPageView() {
       if (typeof this.ga !== 'undefined') {
-        this.ga('send', 'pageview', this.logEntry.payload.path)
+        this.ga('send', 'pageview', this.logEntry.path)
       }
     },
 
@@ -103,10 +104,8 @@ export default {
     facebookProductView() {
       if (typeof this.fbq !== 'undefined') {
         this.fbq('track', 'ViewContent', {
-          content_ids: this.decodeBase64ProductId(
-            this.logEntry.payload.product.id
-          ),
-          content_name: this.logEntry.payload.product.title,
+          content_ids: this.decodeBase64ProductId(this.logEntry.product.id),
+          content_name: this.logEntry.product.title,
           content_type: 'product',
           product_catalog_id: this.facebookCatalogID
         })
@@ -140,8 +139,8 @@ export default {
         this.ga('send', 'event', 'select_item', {
           items: [
             {
-              item_name: this.logEntry.payload.product.title,
-              price: this.logEntry.payload.product.minPrice,
+              item_name: this.logEntry.product.title,
+              price: this.logEntry.product.minPrice,
               currency: this.logEntry.user.locale.currency
             }
           ]
@@ -167,11 +166,11 @@ export default {
       if (typeof this.fbq !== 'undefined') {
         this.fbq('track', 'AddToCart', {
           content_ids: this.decodeBase64VariantId(
-            this.logEntry.payload.product.variant.id
+            this.logEntry.product.variant.id
           ),
-          content_name: this.logEntry.payload.product.variant.title,
+          content_name: this.logEntry.product.variant.title,
           content_type: 'product',
-          value: this.logEntry.payload.product.variant.price,
+          value: this.logEntry.product.variant.price,
           currency: 'USD',
           product_catalog_id: this.facebookCatalogID
         })
@@ -184,16 +183,16 @@ export default {
           items: [
             {
               item_id: this.decodeBase64ProductId(
-                this.logEntry.payload.product.variant.id
+                this.logEntry.product.variant.id
               ),
-              item_name: this.logEntry.payload.product.title,
-              item_variant: this.logEntry.payload.product.variant.title,
-              price: this.logEntry.payload.product.variant.price,
+              item_name: this.logEntry.product.title,
+              item_variant: this.logEntry.product.variant.title,
+              price: this.logEntry.product.variant.price,
               currency: this.logEntry.user.locale.currency,
-              quantity: this.logEntry.payload.product.quantity
+              quantity: this.logEntry.product.quantity
             }
           ],
-          value: this.logEntry.payload.product.variant.price
+          value: this.logEntry.product.variant.price
         })
         this.ga('send', 'event', 'UX', 'click', 'add to cart')
       }
@@ -207,16 +206,16 @@ export default {
           items: [
             {
               item_id: this.decodeBase64ProductId(
-                this.logEntry.payload.product.variant.id
+                this.logEntry.product.variant.id
               ),
-              item_name: this.logEntry.payload.product.title,
-              item_variant: this.logEntry.payload.product.variant.title,
-              price: this.logEntry.payload.product.variant.price,
+              item_name: this.logEntry.product.title,
+              item_variant: this.logEntry.product.variant.title,
+              price: this.logEntry.product.variant.price,
               currency: this.logEntry.user.locale.currency,
-              quantity: this.logEntry.payload.product.quantity
+              quantity: this.logEntry.product.quantity
             }
           ],
-          value: this.logEntry.payload.product.variant.price
+          value: this.logEntry.product.variant.price
         })
 
         this.ga('send', 'event', 'UX', 'click', 'remove from cart')

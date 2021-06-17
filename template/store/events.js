@@ -42,11 +42,11 @@ export const mutations = {
 }
 
 export const actions = {
-  pageView({ commit, rootState }, payload) {
-    if (payload) {
+  pageView({ commit, rootState }, { path }) {
+    if (path) {
       commit('addEvent', {
         eventType: 'PAGE_VIEW',
-        payload,
+        path,
         ...eventProperties(rootState)
       })
     }
@@ -93,21 +93,21 @@ export const actions = {
     }
   },
 
-  addToCart({ commit, rootState }, payload) {
-    if (payload) {
+  addToCart({ commit, rootState }, { product }) {
+    if (product) {
       commit('addEvent', {
         eventType: 'ADD_TO_CART',
-        payload,
+        product,
         ...eventProperties(rootState)
       })
     }
   },
 
-  removeFromCart({ commit, rootState }, payload) {
-    if (payload) {
+  removeFromCart({ commit, rootState }, { product }) {
+    if (product) {
       commit('addEvent', {
         eventType: 'REMOVE_FROM_CART',
-        payload,
+        product,
         ...eventProperties(rootState)
       })
     }
@@ -133,11 +133,11 @@ export const actions = {
     }
   },
 
-  productSelect({ commit, rootState }, payload) {
-    if (payload) {
+  productSelect({ commit, rootState }, { product }) {
+    if (product) {
       commit('addEvent', {
         eventType: 'PRODUCT_SELECT',
-        payload,
+        product,
         ...eventProperties(rootState)
       })
     }
