@@ -42,7 +42,19 @@ export default () => {
 
         if (!product) {
           if (process.client) {
-            product = await get(namespace)
+            const isIOS =
+              [
+                'iPad Simulator',
+                'iPhone Simulator',
+                'iPod Simulator',
+                'iPad',
+                'iPhone',
+                'iPod'
+              ].includes(navigator.platform) ||
+              (navigator.userAgent.includes('Mac') && 'ontouchend' in document)
+            if (!isIOS) {
+              product = await get(namespace)
+            }
             if (product) {
               // product was found in indexedDB
               dispatch('setupProduct', product)
