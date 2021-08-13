@@ -20,6 +20,15 @@ export default ({ store }, inject) => {
     }
   }
 
+  const deregisterProduct = (handle) => {
+    const namespace = `product/${handle}`
+    if (!store.hasModule(namespace)) {
+      return
+    }
+    store.unregisterModule(namespace)
+  }
+
   inject('fetchProduct', fetchProduct)
   inject('registerProduct', registerProduct)
+  inject('deregisterProduct', deregisterProduct)
 }

@@ -124,7 +124,7 @@ export default {
   },
 
   beforeDestroy() {
-    this.$store.commit(`${this.namespace}/unloadProduct`)
+    this.$deregisterProduct(this.product.handle)
   },
   methods: {
     ...mapMutations('cart', ['showCart']),

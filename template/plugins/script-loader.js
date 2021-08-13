@@ -16,5 +16,4 @@ loader.onmessage = () => {
 
 const loadScripts = () => {
   // include the script code to be injected here
-  console.log('scripts loaded!')
 }

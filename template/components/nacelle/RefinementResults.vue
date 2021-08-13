@@ -70,8 +70,7 @@ export default {
 
   beforeDestroy() {
     this.loadedResults.forEach((product) => {
-      const namespace = `product/${product.handle}`
-      this.$store.commit(`${namespace}/unloadProduct`)
+      this.$deregisterProduct(product.handle)
     })
   },
   methods: {

@@ -45,8 +45,7 @@ export default {
   },
   beforeDestroy() {
     this.products.forEach((product) => {
-      const namespace = `product/${product.handle}`
-      this.$store.commit(`${namespace}/unloadProduct`)
+      this.$deregisterProduct(product.handle)
     })
   }
 }

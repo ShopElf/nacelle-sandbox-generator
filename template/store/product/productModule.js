@@ -120,9 +120,6 @@ export default () => {
       setProduct: (state, product) => {
         state.product = product
       },
-      unloadProduct: (state) => {
-        state.product = null
-      },
       setOptions: (state) => {
         const nestedOptions = state.product.variants.map((variant) => {
           if (variant.selectedOptions) {
