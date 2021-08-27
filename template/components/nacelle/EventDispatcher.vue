@@ -32,7 +32,7 @@ export default {
   watch: {
     log() {
       if (process.client) {
-        switch (this.logEntry.eventType) {
+        switch (this.logEntry?.eventType) {
           case 'PAGE_VIEW':
             this.facebookPageView()
             this.googleAnalyticsPageView()

@@ -1,6 +1,6 @@
 {
   "name": "@nacelle/nuxt-starter-kit",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "author": "Nacelle",
   "scripts": {
     "dev": "nuxt",

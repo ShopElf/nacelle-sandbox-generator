@@ -14,7 +14,8 @@ export default {
         id: 'Z2lkOi8vc2hvcGlmeS9JbWFnZVNvdXJjZS84NDYxNzc5MjA2Mjc5',
         thumbnailSrc:
           'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/over-the-shoulder-pink-purse.jpg?v=1587622578&width=100',
-        src: 'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/over-the-shoulder-pink-purse.jpg?v=1587622578',
+        src:
+          'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/over-the-shoulder-pink-purse.jpg?v=1587622578',
         type: 'image',
         altText: 'Shevonne Bag'
       },
@@ -47,7 +48,8 @@ export default {
         id: 'Z2lkOi8vc2hvcGlmeS9JbWFnZVNvdXJjZS84NDYxODgwMzI4MzI3',
         thumbnailSrc:
           'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-1270015.jpg?v=1587622893&width=100',
-        src: 'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-1270015.jpg?v=1587622893',
+        src:
+          'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-1270015.jpg?v=1587622893',
         type: 'image',
         altText: 'Raffaella Bag'
       },
@@ -84,7 +86,8 @@ export default {
         id: 'Z2lkOi8vc2hvcGlmeS9JbWFnZVNvdXJjZS84NDYxODkwODc5NjIz',
         thumbnailSrc:
           'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-2853527.jpg?v=1587622929&width=100',
-        src: 'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-2853527.jpg?v=1587622929',
+        src:
+          'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-2853527.jpg?v=1587622929',
         type: 'image',
         altText: 'Otto Shirt'
       },
@@ -117,7 +120,8 @@ export default {
         id: 'Z2lkOi8vc2hvcGlmeS9JbWFnZVNvdXJjZS84NDYxODk2ODQzMzk5',
         thumbnailSrc:
           'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-3004884.jpg?v=1587622946&width=100',
-        src: 'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-3004884.jpg?v=1587622946',
+        src:
+          'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-3004884.jpg?v=1587622946',
         type: 'image',
         altText: 'Pfeffer Glasses'
       },
@@ -154,7 +158,8 @@ export default {
         id: 'Z2lkOi8vc2hvcGlmeS9JbWFnZVNvdXJjZS84NDYxODcyMTAzNTU5',
         thumbnailSrc:
           'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-1102219.jpg?v=1587622866&width=100',
-        src: 'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-1102219.jpg?v=1587622866',
+        src:
+          'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-1102219.jpg?v=1587622866',
         type: 'image',
         altText: 'Blossom Rattan Bag'
       },
@@ -187,7 +192,8 @@ export default {
         id: 'Z2lkOi8vc2hvcGlmeS9JbWFnZVNvdXJjZS84NDYxODc2ODU0OTE5',
         thumbnailSrc:
           'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-2304764.jpg?v=1587622882&width=100',
-        src: 'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-2304764.jpg?v=1587622882',
+        src:
+          'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-2304764.jpg?v=1587622882',
         type: 'image',
         altText: 'Giralda Bag'
       },
@@ -220,7 +226,8 @@ export default {
         id: 'Z2lkOi8vc2hvcGlmeS9JbWFnZVNvdXJjZS84NDYxODgxMjc4NTk5',
         thumbnailSrc:
           'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-2365475.jpg?v=1587622896&width=100',
-        src: 'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-2365475.jpg?v=1587622896',
+        src:
+          'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-2365475.jpg?v=1587622896',
         type: 'image',
         altText: 'Amalia Sunglasses'
       },
@@ -253,7 +260,8 @@ export default {
         id: 'Z2lkOi8vc2hvcGlmeS9JbWFnZVNvdXJjZS84NDYxODc5NTc0NjYz',
         thumbnailSrc:
           'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-2977304.jpg?v=1587622891&width=100',
-        src: 'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-2977304.jpg?v=1587622891',
+        src:
+          'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-2977304.jpg?v=1587622891',
         type: 'image',
         altText: 'Reisen Briefcase'
       },
@@ -286,7 +294,8 @@ export default {
         id: 'Z2lkOi8vc2hvcGlmeS9JbWFnZVNvdXJjZS84NDYxODQ4OTAzODE1',
         thumbnailSrc:
           'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-1308324.jpg?v=1587622797&width=100',
-        src: 'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-1308324.jpg?v=1587622797',
+        src:
+          'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-1308324.jpg?v=1587622797',
         type: 'image',
         altText: 'Flavia Heel Sandals'
       },
@@ -323,7 +332,8 @@ export default {
         id: 'Z2lkOi8vc2hvcGlmeS9JbWFnZVNvdXJjZS84NDYxODYyNzMxOTEx',
         thumbnailSrc:
           'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-1000373.jpg?v=1587622837&width=100',
-        src: 'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-1000373.jpg?v=1587622837',
+        src:
+          'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-1000373.jpg?v=1587622837',
         type: 'image',
         altText: 'Luciella Dress'
       },
@@ -361,7 +371,8 @@ export default {
         id: 'Z2lkOi8vc2hvcGlmeS9JbWFnZVNvdXJjZS84NDYxODQ2MTUxMzAz',
         thumbnailSrc:
           'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-871495.jpg?v=1587622789&width=100',
-        src: 'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-871495.jpg?v=1587622789',
+        src:
+          'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-871495.jpg?v=1587622789',
         type: 'image',
         altText: 'Chatham Glasses'
       },
@@ -398,7 +409,8 @@ export default {
         id: 'Z2lkOi8vc2hvcGlmeS9JbWFnZVNvdXJjZS84NDYxODYwMDc3NzAz',
         thumbnailSrc:
           'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-2534961.jpg?v=1587622829&width=100',
-        src: 'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-2534961.jpg?v=1587622829',
+        src:
+          'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-2534961.jpg?v=1587622829',
         type: 'image',
         altText: 'Betsy Handbag'
       },
@@ -431,7 +443,8 @@ export default {
         id: 'Z2lkOi8vc2hvcGlmeS9JbWFnZVNvdXJjZS84NDYxNzc3ODMwMDIz',
         thumbnailSrc:
           'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/couple-at-sunset.jpg?v=1587622574&width=100',
-        src: 'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/couple-at-sunset.jpg?v=1587622574',
+        src:
+          'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/couple-at-sunset.jpg?v=1587622574',
         type: 'image',
         altText: 'Reilly Crop Top'
       },
@@ -468,7 +481,8 @@ export default {
         id: 'Z2lkOi8vc2hvcGlmeS9JbWFnZVNvdXJjZS84NDYxODQ5NTU5MTc1',
         thumbnailSrc:
           'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-977908.jpg?v=1587622799&width=100',
-        src: 'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-977908.jpg?v=1587622799',
+        src:
+          'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-977908.jpg?v=1587622799',
         type: 'image',
         altText: 'Bianca Boots'
       },
@@ -505,7 +519,8 @@ export default {
         id: 'Z2lkOi8vc2hvcGlmeS9JbWFnZVNvdXJjZS84NDYxODg5MTQyOTE5',
         thumbnailSrc:
           'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-2905720.jpg?v=1587622921&width=100',
-        src: 'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-2905720.jpg?v=1587622921',
+        src:
+          'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-2905720.jpg?v=1587622921',
         type: 'image',
         altText: 'Bauer Sunglasses'
       },
@@ -542,7 +557,8 @@ export default {
         id: 'Z2lkOi8vc2hvcGlmeS9JbWFnZVNvdXJjZS84NDYxODY2MzY5MTU5',
         thumbnailSrc:
           'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-1868819.jpg?v=1587622846&width=100',
-        src: 'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-1868819.jpg?v=1587622846',
+        src:
+          'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-1868819.jpg?v=1587622846',
         type: 'image',
         altText: 'Go Time Briefcase'
       },
@@ -579,7 +595,8 @@ export default {
         id: 'Z2lkOi8vc2hvcGlmeS9JbWFnZVNvdXJjZS84NDYxODU3ODQ5NDc5',
         thumbnailSrc:
           'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-247298.jpg?v=1587622822&width=100',
-        src: 'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-247298.jpg?v=1587622822',
+        src:
+          'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-247298.jpg?v=1587622822',
         type: 'image',
         altText: 'Savannah Shirt'
       },
@@ -616,7 +633,8 @@ export default {
         id: 'Z2lkOi8vc2hvcGlmeS9JbWFnZVNvdXJjZS84NDYxODk5MjM1NDYz',
         thumbnailSrc:
           'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-2929281.jpg?v=1587622953&width=100',
-        src: 'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-2929281.jpg?v=1587622953',
+        src:
+          'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-2929281.jpg?v=1587622953',
         type: 'image',
         altText: 'Liesel Boots'
       },
@@ -653,7 +671,8 @@ export default {
         id: 'Z2lkOi8vc2hvcGlmeS9JbWFnZVNvdXJjZS84NDYxODc4ODg2NTM1',
         thumbnailSrc:
           'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-2444913.jpg?v=1587622889&width=100',
-        src: 'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-2444913.jpg?v=1587622889',
+        src:
+          'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-2444913.jpg?v=1587622889',
         type: 'image',
         altText: 'Claudia Bag'
       },
@@ -686,7 +705,8 @@ export default {
         id: 'Z2lkOi8vc2hvcGlmeS9JbWFnZVNvdXJjZS84NDYxODk3NDMzMjIz',
         thumbnailSrc:
           'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-1936848.jpg?v=1587622949&width=100',
-        src: 'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-1936848.jpg?v=1587622949',
+        src:
+          'https://cdn.shopify.com/s/files/1/0344/4362/4583/products/pexels-photo-1936848.jpg?v=1587622949',
         type: 'image',
         altText: 'Sascha Tote'
       },

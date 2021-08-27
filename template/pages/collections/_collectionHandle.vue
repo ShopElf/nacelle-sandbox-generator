@@ -42,16 +42,8 @@ export default {
     }
   },
   async fetch() {
-    const { collectionHandle: handle } = this.$route.params
-
-    this.collection = await this.$nacelle.data
-      .collection({ handle })
-      .catch(() => console.warn(`No collection with handle: '${handle}' found`))
-
-    this.page = await this.$nacelle.data
-      .page({ handle })
-      .catch(() => console.warn(`No page with handle: '${handle}' found`))
-
+    const handle = this.$route.params?.collectionHandle
+    await Promise.all([this.fetchCollection(handle), this.fetchPage(handle)])
     await this.fetchProducts(0, this.productVisibilityCount + this.fetchBuffer)
   },
   head() {
@@ -91,28 +83,56 @@ export default {
   },
   computed: {
     visibleProducts() {
-      if (this.collectionProducts.length) {
-        return this.collectionProducts.slice(0, this.productVisibilityCount)
+      return this.collectionProducts?.slice(0, this.productVisibilityCount)
+    }
+  },
+  watch: {
+    collectionProducts: {
+      immediate: true,
+      handler(products) {
+        if (products) {
+          products.forEach((product) => {
+            this.$fetchProduct(product)
+          })
+        }
       }
-      return []
     }
   },
   mounted() {
     if (this.collection) {
-      this.collectionProducts.forEach((product) => {
-        this.$registerProduct(product.handle)
-      })
       this.collectionView({ collection: this.collection })
     }
   },
   beforeDestroy() {
-    this.collectionProducts.forEach((product) => {
-      this.$deregisterProduct(product.handle)
+    this.visibleProducts.forEach((product) => {
+      this.$deregisterProduct(product)
     })
   },
   methods: {
     ...mapActions('events', ['collectionView']),
 
+    async fetchCollection(handle) {
+      this.collection = await this.$nacelle.data
+        .collection({ handle })
+        .catch(() =>
+          console.warn(`No collection with handle: '${handle}' found`)
+        )
+    },
+    async fetchPage(handle) {
+      this.page = await this.$nacelle.data
+        .page({ handle })
+        .catch(() => console.warn(`No page with handle: '${handle}' found`))
+    },
+    async fetchProducts(start, end) {
+      this.isFetching = true
+      let handles = this.collection?.productLists[0]?.handles
+      if (handles) {
+        handles = [...handles].splice(start, end)
+        const products = await this.$nacelle.data.products({ handles })
+        this.collectionProducts = [...this.collectionProducts, ...products]
+        this.isFetching = false
+      }
+    },
     showMore() {
       if (!this.collection) {
         return
@@ -121,29 +141,6 @@ export default {
       const fetchCursor = currentCount + this.fetchBuffer
       this.productVisibilityCount = currentCount + 12
       this.fetchProducts(fetchCursor, fetchCursor + 12)
-    },
-    async fetchProducts(start, end) {
-      if (!this.collection?.productLists[0]?.handles) {
-        return
-      }
-      this.isFetching = true
-
-      const products = this.collection.productLists[0].handles
-        .slice(start, end)
-        .map((handle, index) => {
-          this.$set(this.collectionProducts, index + start, {
-            handle,
-            isLoading: true
-          })
-          return handle
-        })
-        .map(async (handle, index) => {
-          const product = await this.$fetchProduct(handle)
-          this.$set(this.collectionProducts, index + start, product)
-        })
-
-      await Promise.all(products)
-      this.isFetching = false
     }
   }
 }

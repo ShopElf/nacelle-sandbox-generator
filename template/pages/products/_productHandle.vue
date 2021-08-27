@@ -60,7 +60,9 @@ export default {
     }
   },
   async fetch() {
-    this.product = await this.$fetchProduct(this.$route.params.productHandle)
+    this.product = await this.$nacelle.data.product({
+      handle: this.$route.params.productHandle
+    })
   },
   head() {
     if (this.product) {
@@ -113,22 +115,31 @@ export default {
   computed: {
     ...mapGetters('space', ['getMetatag'])
   },
-  mounted() {
-    this.namespace = `product/${this.$route.params.productHandle}`
-    this.$registerProduct(this.$route.params.productHandle)
-
-    if (this.$store.state[this.namespace]) {
-      const { product, selectedVariant } = this.$store.state[this.namespace]
-      this.productView({ product, selectedVariant })
+  watch: {
+    product: {
+      immediate: true,
+      handler(val) {
+        if (val) {
+          this.setupProduct(this.product)
+          const storeProduct = this.$store.state[this.namespace]
+          if (storeProduct) {
+            const { product, selectedVariant } = storeProduct
+            this.productView({ product, selectedVariant })
+          }
+        }
+      }
     }
   },
-
   beforeDestroy() {
-    this.$deregisterProduct(this.product.handle)
+    this.$deregisterProduct(this.product)
   },
   methods: {
     ...mapMutations('cart', ['showCart']),
-    ...mapActions('events', ['productView'])
+    ...mapActions('events', ['productView']),
+    async setupProduct(val) {
+      this.namespace = `product/${val.handle}`
+      await this.$fetchProduct(val)
+    }
   }
 }
 </script>

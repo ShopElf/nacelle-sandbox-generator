@@ -1,13 +1,11 @@
 <template>
   <div>
     <h3>{{ title }}</h3>
-    <product-grid :products="products" />
+    <product-grid v-if="products && products.length" :products="products" />
   </div>
 </template>
 
 <script>
-import productModule from '~/store/product/productModule'
-
 export default {
   props: {
     collectionHandle: {
@@ -29,23 +27,27 @@ export default {
     }
   },
   async fetch() {
-    const collectionData = await this.$nacelle.data.collection({
+    const collection = await this.$nacelle.data.collection({
       handle: this.collectionHandle
     })
-    const products = collectionData.productLists[0].handles.map((handle) => {
-      const namespace = `product/${handle}`
-      if (!this.$store.hasModule(namespace)) {
-        this.$store.registerModule(namespace, productModule(), {
-          preserveState: false
-        })
+    const handles = collection?.productLists[0]?.handles
+    if (handles) {
+      this.products = await this.$nacelle.data.products({ handles })
+    }
+  },
+  watch: {
+    products: {
+      immediate: true,
+      handler(vals) {
+        if (vals) {
+          vals.forEach((val) => this.$fetchProduct(val))
+        }
       }
-      return this.$store.dispatch(`${namespace}/fetchProduct`, handle)
-    })
-    this.products = await Promise.all(products)
+    }
   },
   beforeDestroy() {
-    this.products?.forEach((product) => {
-      this.$deregisterProduct(product.handle)
+    this.storeProducts?.forEach((product) => {
+      this.$deregisterProduct(product)
     })
   }
 }

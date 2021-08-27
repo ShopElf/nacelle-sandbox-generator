@@ -29,50 +29,9 @@ export default () => {
       }
     },
     actions: {
-      async fetchProduct({ state, dispatch }, handle) {
-        const namespace = `product/${handle}`
-        let product = state.product
-
-        // scenarios & product states:
-        // 1 - landing page (statically generated) -> product already loaded in vuex; later need to set in idb
-        // 2 - non-landing (client-side rendered)
-        //   a. if product is in vuex (loaded) -> do nothing, continue
-        //   b. else if product not in vuex BUT in idb -> get from idb, load in vuex
-        //   c. else if product not in vuex NOR in idb -> get from $nacelle, then set in idb
-
-        if (!product) {
-          if (process.client) {
-            const isIOS =
-              [
-                'iPad Simulator',
-                'iPhone Simulator',
-                'iPod Simulator',
-                'iPad',
-                'iPhone',
-                'iPod'
-              ].includes(navigator.platform) ||
-              (navigator.userAgent.includes('Mac') && 'ontouchend' in document)
-            if (!isIOS) {
-              product = await get(namespace)
-            }
-            if (product) {
-              // product was found in indexedDB
-              dispatch('setupProduct', product)
-            } else {
-              // not in indexedDB, load product with $nacelle client-side
-              product = await this.$nacelle.data.product({ handle })
-              dispatch('setupProduct', product)
-              dispatch('storeProduct', product)
-            }
-          } else {
-            // load product with $nacelle server-side
-            product = await this.$nacelle.data.product({ handle })
-            dispatch('setupProduct', product)
-          }
-        } else {
-          // product still in vuex
-        }
-        return product
+      fetchProduct({ dispatch }, product) {
+        dispatch('setupProduct', product)
+        dispatch('storeProduct', product)
       },
       setupProduct({ commit }, product) {
         commit('setProduct', product)
@@ -121,7 +80,7 @@ export default () => {
         state.product = product
       },
       setOptions: (state) => {
-        const nestedOptions = state.product.variants.map((variant) => {
+        const nestedOptions = state.product?.variants?.map((variant) => {
           if (variant.selectedOptions) {
             return variant.selectedOptions.map((option) => {
               if (option.name === 'Color') {
@@ -166,7 +125,8 @@ export default () => {
         state.options = optionValuesByName
       },
       setDefaultSelectedVariant: (state) => {
-        state.selectedVariant = state.product.variants[0]
+        state.selectedVariant =
+          state.product?.variants && state.product.variants[0]
       },
       setSelectedVariant: (state, selectedVariant) => {
         state.selectedVariant = selectedVariant

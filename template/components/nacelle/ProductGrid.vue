@@ -3,7 +3,6 @@
     <template v-for="product in products">
       <div v-if="product" :key="product.handle" :class="columnClasses">
         <product-card
-          v-if="!product.isLoading && $store.state[`product/${product.handle}`]"
           :product="product"
           :show-quantity-update="showQuantityUpdate"
           :show-add-to-cart="showAddToCart"

@@ -101,7 +101,8 @@ export default {
       thumbnailSrc:
         'https://cdn.shopify.com/s/files/1/0248/6308/0553/products/young-man-in-bright-fashion_925x_8565e071-cb7b-4688-9c5b-bce928c71020.jpg?v=1561603361&width=250',
       id: 'Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvMTEzNzgyMDY5OTg2MzM=',
-      src: 'https://cdn.shopify.com/s/files/1/0248/6308/0553/products/young-man-in-bright-fashion_925x_8565e071-cb7b-4688-9c5b-bce928c71020.jpg?v=1561603361&width=750',
+      src:
+        'https://cdn.shopify.com/s/files/1/0248/6308/0553/products/young-man-in-bright-fashion_925x_8565e071-cb7b-4688-9c5b-bce928c71020.jpg?v=1561603361&width=750',
       type: 'image',
       __typename: 'Media'
     }
@@ -130,7 +131,8 @@ export default {
     }
   ],
   featuredMedia: {
-    src: 'https://cdn.shopify.com/s/files/1/0248/6308/0553/products/young-man-in-bright-fashion_925x_8565e071-cb7b-4688-9c5b-bce928c71020.jpg?v=1561603361&width=750',
+    src:
+      'https://cdn.shopify.com/s/files/1/0248/6308/0553/products/young-man-in-bright-fashion_925x_8565e071-cb7b-4688-9c5b-bce928c71020.jpg?v=1561603361&width=750',
     thumbnailSrc:
       'https://cdn.shopify.com/s/files/1/0248/6308/0553/products/young-man-in-bright-fashion_925x_8565e071-cb7b-4688-9c5b-bce928c71020.jpg?v=1561603361&width=250',
     id: 'Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvMTEzNzgyMDY5OTg2MzM=',

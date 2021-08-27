@@ -2,7 +2,7 @@
   <div>
     <button
       class="button is-primary"
-      :disabled="isOutOfStock"
+      :disabled="!isLoading && isOutOfStock"
       @click="addToCart"
     >
       <slot>
@@ -37,20 +37,22 @@ export default {
   data() {
     return { productState: 'initial' }
   },
-
   computed: {
     ...mapState('cart', ['lineItems']),
-    isOutOfStock() {
+    isLoading() {
       return (
-        (this.variant && !this.variant.availableForSale) ||
-        !this.product.availableForSale
+        this.variant?.availableForSale === undefined ||
+        this.product?.availableForSale === undefined
       )
+    },
+    isOutOfStock() {
+      return !this.variant?.availableForSale || !this.product?.availableForSale
     },
     buttonText() {
       if (this.productState === 'added') {
         return 'Added!'
       }
-      if (this.isOutOfStock) {
+      if (!this.isLoading && this.isOutOfStock) {
         return 'Out of Stock'
       }
       return 'Add To Cart'

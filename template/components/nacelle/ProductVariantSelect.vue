@@ -55,10 +55,11 @@ export default {
   },
   computed: {
     selectedVariant() {
-      return this.$store.state[`product/${this.product.handle}`].selectedVariant
+      return this.$store.state[`product/${this.product.handle}`]
+        ?.selectedVariant
     },
     options() {
-      return this.$store.state[`product/${this.product.handle}`].options
+      return this.$store.state[`product/${this.product.handle}`]?.options
     }
   }
 }

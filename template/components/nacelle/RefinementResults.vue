@@ -24,7 +24,6 @@
 
 <script>
 import { mapState } from 'vuex'
-import productModule from '~/store/product/productModule'
 
 export default {
   props: {
@@ -67,10 +66,9 @@ export default {
       immediate: true
     }
   },
-
   beforeDestroy() {
     this.loadedResults.forEach((product) => {
-      this.$deregisterProduct(product.handle)
+      this.$deregisterProduct(product)
     })
   },
   methods: {
@@ -85,30 +83,13 @@ export default {
     async fetchProducts(start, end) {
       this.isFetching = true
 
-      const products = this.searchData
-        .slice(start, end)
-        .map(({ handle }, index) => {
-          this.$set(this.loadedResults, index + start, {
-            handle,
-            isLoading: true
-          })
-          return handle
-        })
-        .map(async (handle, index) => {
-          const namespace = `product/${handle}`
-          if (!this.$store.hasModule(namespace)) {
-            this.$store.registerModule(namespace, productModule(), {
-              preserveState: !!this.$store.state[namespace]
-            })
-          }
-          const product = await this.$store.dispatch(
-            `${namespace}/fetchProduct`,
-            handle
-          )
-          this.$set(this.loadedResults, index + start, product)
-        })
-
-      await Promise.all(products)
+      let handles = this.searchData?.map((product) => product.handle)
+      handles = [...handles].splice(start, end)
+      const products = await this.$nacelle.data.products({ handles })
+      this.loadedResults = [...this.loadedResults, ...products]
+      this.loadedResults.forEach((product) => {
+        this.$fetchProduct(product)
+      })
       this.isFetching = false
     }
   }

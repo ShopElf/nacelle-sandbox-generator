@@ -1,18 +1,18 @@
 import productModule from '~/store/product/productModule'
 
 export default ({ store }, inject) => {
-  const fetchProduct = async (handle) => {
-    const namespace = `product/${handle}`
+  const fetchProduct = async (product) => {
+    const namespace = `product/${product.handle}`
     if (!store.hasModule(namespace)) {
       store.registerModule(namespace, productModule(), {
         preserveState: !!store.state[namespace]
       })
     }
-    return await store.dispatch(`${namespace}/fetchProduct`, handle)
+    return await store.dispatch(`${namespace}/fetchProduct`, product)
   }
 
-  const registerProduct = (handle) => {
-    const namespace = `product/${handle}`
+  const registerProduct = (product) => {
+    const namespace = `product/${product.handle}`
     if (!store.hasModule(namespace)) {
       store.registerModule(namespace, productModule(), {
         preserveState: !!store.state[namespace]
@@ -20,8 +20,8 @@ export default ({ store }, inject) => {
     }
   }
 
-  const deregisterProduct = (handle) => {
-    const namespace = `product/${handle}`
+  const deregisterProduct = (product) => {
+    const namespace = `product/${product.handle}`
     if (!store.hasModule(namespace)) {
       return
     }
