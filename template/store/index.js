@@ -27,8 +27,6 @@ export const actions = {
     }
 
     set('project-id', window.btoa(this.$nacelle.client.id))
-
-    await this.$nacelle.nacelleNuxtServerInit(ctx, context)
   },
   async nuxtServerInit(ctx, context) {
     await this.$nacelle.nacelleNuxtServerInit(ctx, context)
